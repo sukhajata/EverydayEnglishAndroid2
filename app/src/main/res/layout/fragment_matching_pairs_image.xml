@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame1"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <Button
+            android:id="@+id/matchingPairsImage_buttonText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight"
+            android:padding="@dimen/button_padding" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame2"
+        android:layout_toRightOf="@id/matchingPairsImage_frame1"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <Button
+            android:id="@+id/matchingPairsImage_buttonText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame3"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/matchingPairsImage_frame1"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <Button
+            android:id="@+id/matchingPairsImage_buttonText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight"
+            android:padding="@dimen/button_padding" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame4"
+        android:layout_below="@id/matchingPairsImage_frame2"
+        android:layout_toRightOf="@id/matchingPairsImage_frame3"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <Button
+            android:id="@+id/matchingPairsImage_buttonText4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame5"
+        android:layout_below="@id/matchingPairsImage_frame3"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/matchingPairsImage_imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame6"
+        android:layout_below="@id/matchingPairsImage_frame3"
+        android:layout_toRightOf="@id/matchingPairsImage_frame5"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/matchingPairsImage_imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame7"
+        android:layout_below="@id/matchingPairsImage_frame5"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/matchingPairsImage_imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground" 
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/matchingPairsImage_frame8"
+        android:layout_below="@id/matchingPairsImage_frame6"
+        android:layout_toRightOf="@id/matchingPairsImage_frame7"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/matchingPairsImage_imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+</android.support.percent.PercentRelativeLayout>

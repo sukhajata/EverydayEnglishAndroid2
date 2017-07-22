@@ -1,0 +1,15 @@
+INSERT INTO `Category` (`Id`, `Name`, `Instructions`) VALUES
+(1, 'Multiple Choice Image', 'เลือกภาพที่ถูกต้อง'),
+(2, 'Multiple Choice Text', 'แปล'),
+(3, 'Missing Word', 'หาคำที่หายไป'),
+(4, 'Teaching', 'บันทึกไวยากรณ์'),
+(5, 'Phonetics', 'ฝึกออกเสียง'),
+(6, 'Matching Pairs Text', 'หาคู่'),
+(8, 'Speaking', 'พูดตาม'),
+(9, 'Translate', 'แปลประโยค'),
+(10, 'Multiple Choice Image Text', 'เลือกภาพที่ถูกต้อง'),
+(11, 'Matching Pairs Image', 'หาคู่'),
+(12, 'Matching Pairs Image Text', 'หาคู่'),
+(13, 'Matching Pairs Writing', ''),
+(14, 'Writing', 'เขียนคำที่คุณเห็น'),
+(15, 'Bingo', 'แตะคำที่ถูกต้อง');

@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="button_border">7dp</dimen>
+    <dimen name="image_border">3dp</dimen>
+    <dimen name="button_padding">5dp</dimen>
+    <dimen name="label_padding">5dp</dimen>
+    <dimen name="spacer">30dp</dimen>
+    <dimen name="spacer_image_text">15dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_size_target">18dp</dimen>
+</resources>

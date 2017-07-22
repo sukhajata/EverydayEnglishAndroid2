@@ -1,0 +1,87 @@
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:background="@color/colorPrimaryLight"
+        android:padding="@dimen/button_padding"
+        android:id="@+id/multipleChoiceImage_speaker"
+        android:src="@drawable/ic_volume_up_black_24dp"
+        android:layout_marginTop="@dimen/button_border"
+        android:layout_marginLeft="@dimen/button_border"/>
+    <TextView
+        android:id="@+id/multipleChoiceImage_textTarget"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@id/multipleChoiceImage_speaker"
+        android:layout_height="34dp"
+        android:textSize="@dimen/text_size_target"
+        android:padding="@dimen/button_padding"
+        android:background="@color/colorPrimaryLight"
+        android:layout_marginTop="@dimen/button_border"
+        android:layout_marginBottom="@dimen/button_border"
+        android:layout_marginRight="@dimen/button_border"/>
+
+
+    <FrameLayout
+        android:id="@+id/multipleChoiceImage_frame1"
+        android:layout_below="@id/multipleChoiceImage_textTarget"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/multipleChoiceImage_imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/multipleChoiceImage_frame2"
+        android:layout_below="@id/multipleChoiceImage_textTarget"
+        android:layout_toRightOf="@id/multipleChoiceImage_frame1"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/multipleChoiceImage_imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/multipleChoiceImage_frame3"
+        android:layout_below="@id/multipleChoiceImage_frame1"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/multipleChoiceImage_imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/multipleChoiceImage_frame4"
+        android:layout_below="@id/multipleChoiceImage_frame2"
+        android:layout_toRightOf="@id/multipleChoiceImage_frame3"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBorderInactive"
+        android:padding="@dimen/button_border">
+        <ImageView
+            android:id="@+id/multipleChoiceImage_imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLabelBackground"
+            android:padding="@dimen/button_border" />
+    </FrameLayout>
+</android.support.percent.PercentRelativeLayout>

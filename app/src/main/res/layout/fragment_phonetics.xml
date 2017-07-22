@@ -1,0 +1,69 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="everyday.sukhajata.com.everydayenglish.PhoneticsFragment"
+    android:background="@color/colorPrimaryDark">
+
+
+        <LinearLayout
+            android:id="@+id/phonetics_layoutTarget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/phonetics_speaker"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:background="@color/colorPrimaryLight"
+                android:src="@drawable/ic_volume_up_black_24dp"
+                android:padding="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_border"
+                android:layout_marginLeft="@dimen/button_border"
+                android:layout_marginBottom="@dimen/button_border"/>
+            <TextView
+                android:id="@+id/phonetics_textTarget"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="@color/colorPrimaryLight"
+                android:textSize="@dimen/text_size_target"
+                android:padding="@dimen/button_padding"
+                android:layout_marginBottom="@dimen/button_border"
+                android:layout_marginTop="@dimen/button_border"
+                android:layout_marginRight="@dimen/button_border"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phonetics_layoutWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phonetics_layoutTarget"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:background="@color/colorLabelBackground"
+        android:layout_gravity="center">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/phonetics_txtNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phonetics_layoutWord"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorLabelBackground"
+        android:padding="20dp" />
+
+    <Button
+        android:id="@+id/phonetics_btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/button_border"
+        style="@style/NavigationButton"
+        android:text="@string/next"/>
+
+</RelativeLayout>

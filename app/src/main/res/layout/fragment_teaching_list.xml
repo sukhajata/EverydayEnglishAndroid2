@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:padding="@dimen/activity_horizontal_margin">
+    <TextView
+        android:id="@+id/teaching_txtContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/teaching_list"
+        android:name="everyday.sukhajata.com.everydayenglish.TeachingFragment"
+        android:layout_below="@id/teaching_txtContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="3sp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="everyday.sukhajata.com.everydayenglish.TeachingFragment"
+        tools:listitem="@layout/fragment_teaching" />
+
+    <Button
+        android:id="@+id/teaching_btn_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/teaching_list"
+        android:layout_centerHorizontal="true"
+        android:text="@string/next"
+        style="@style/NavigationButton"/>
+
+</RelativeLayout>
+</ScrollView>

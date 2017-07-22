@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="everyday.sukhajata.com.everydayenglish.TotalsActivity"
+    android:background="@color/colorAccent">
+
+<TextView
+    android:id="@+id/totals_txtLessonCompleted"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="26dp"
+    android:textColor="@color/colorPrimaryDark"
+    android:layout_centerHorizontal="true"
+    android:padding="@dimen/button_padding"
+    android:layout_marginTop="30dp"
+    android:text="@string/lesson_completed"/>
+<TextView
+    android:id="@+id/totals_wordTotal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/totals_txtLessonCompleted"
+    android:textSize="22dp"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true" />
+
+<Button
+    android:id="@+id/totals_btnNext"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="@style/NavigationButton"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="@dimen/button_border"
+    android:text="@string/next"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:layout_above="@id/totals_btnNext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"/>
+</RelativeLayout>
+

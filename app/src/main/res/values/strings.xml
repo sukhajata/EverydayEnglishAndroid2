@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ภาษาอังกฤษทุกวัน</string>
+    <string name="facebook_app_id">254605841663505</string>
+    <string name="add_account">Add Account</string>
+    <string name="email">อีเมล</string>
+    <string name="password">รหัสผ่าน</string>
+    <string name="next">ต่อไป</string>
+    <string name="login">ล็อกอินหรือลงทะเบียน</string>
+    <string name="action_settings">Settings</string>
+    <string name="change_user">เปลี่ยนบัญชี</string>
+    <string name="login_submit">สืบสาน</string>
+    <string name="connect_to_network">ช่วยเชื่อมต่อกับอินเทอร์เน็ตแล้วแตะต่อ</string>
+    <string name="no_internet">ไม่มีอินเทอร์เน็ต</string>
+    <string name="ok">ต่อ</string>
+    <string name="error">ข้อผิดพลาด</string>
+    <string name="word_total_label">จำนวนรวมของคำ</string>
+    <string name="lesson_completed">บทเรียนเสร็จสิ้น</string>
+    <string name="wrong_password">รหัสผ่านไม่ถูกต้อง</string>
+    <string name="downloading_lessons">ดาวน์โหลดบทเรียน</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_lesson">LessonActivity</string>
+    <string name="title_activity_setup">SetupActivity</string>
+</resources>
