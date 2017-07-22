@@ -10,5 +10,6 @@
     <color name="colorBorderInactive">#303F9F</color>
     <color name="colorBorderWrong">#E91E63</color>
     <color name="colorPrimaryLight">#BBDEFB</color>
-
+    <color name="colorLightGrey">#F5F5F5</color>
+    <color name="colorLightYellow">#FFF9C4</color>
 </resources>

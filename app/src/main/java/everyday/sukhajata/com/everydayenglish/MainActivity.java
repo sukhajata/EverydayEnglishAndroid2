@@ -32,9 +32,9 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     public static final int USER_REQUEST_CODE = 1;
     public static final int LESSON_REQUEST_CODE = 2;
     public static final int TOTALS_REQUEST_CODE = 3;
-    private Lesson mLesson;
+    //private Lesson mLesson;
 
-    private User mCurrentUser;
+    //private User mCurrentUser;
     //private boolean mWaitingForDownload;
     private boolean mWaitingForLessons;
     private boolean mWaitingForSlides;
@@ -59,46 +59,25 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
         //select the user. If there are no users launch setup
         EverydayLanguageDbHelper dbHelper = EverydayLanguageDbHelper.getInstance(getApplicationContext());
-        dbHelper.dump();
-        int numUsers = dbHelper.getUserCount();
-        if (numUsers < 0) {
-            Toast.makeText(this, "Error getting users", Toast.LENGTH_LONG).show();
-        } else if (numUsers == 1) {
+        //dbHelper.dump();
+        //int numUsers = dbHelper.getUserCount();
+        User user = dbHelper.getActiveUser();
+        if (user != null) {
             //proceed with only user
-            mCurrentUser = dbHelper.getUser();
-            ContentManager.syncUser(this, this, mCurrentUser.Id, 0, false, true);
+            //mCurrentUser = dbHelper.getUser();
+            ContentManager.syncUser(this, user.Id);
 
-
-            /*
-            mLesson = dbHelper.getNextLesson(mCurrentUser.Id);
-
-            if (mLesson != null) {
-                mWaitingForLessons = false;
-                if ( mLesson.Pages.size() > 0) {
-                    mWaitingForSlides = false;
-                    launchLesson(mLesson);
-                } else {
-                    mWaitingForSlides = true;
-                }
-            } else {
-                Log.d("SUKH", "Waiting for data...");
-                mWaitingForLessons = true;
-                mWaitingForSlides = true;
-            }
-
-            int lastOrder = EverydayLanguageDbHelper
-                    .getInstance(this)
-                    .getLastLessonOrder(mCurrentUser.Id);
-
-            ContentManager.syncData(getApplicationContext(), this, imageUrl,
-                    mCurrentUser.Id, lastOrder);
-                    */
+            LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_content, lessonFragment)
+                    .commitAllowingStateLoss();
 
         } else  {
             //select user or create new
             Log.d("SUKH", "Starting setup");
             Intent intent = new Intent(this, SetupActivity.class);
-            intent.putExtra("UserCount", numUsers);
+            //intent.putExtra("UserCount", numUsers);
             startActivityForResult(intent, USER_REQUEST_CODE);
 
         }

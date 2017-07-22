@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
+
+    <RelativeLayout
+        android:id="@+id/lesson_titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/lesson_txtName"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorLabelBackground"
+            android:layout_margin="@dimen/text_margin"
+            android:text="number 1"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/lesson_txtErrors"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBorderWrong"
+            android:textSize="20dp"
+            android:padding="@dimen/button_padding"
+            />
+        <TextView
+            android:id="@+id/lesson_txtCorrect"
+            android:layout_toLeftOf="@id/lesson_txtErrors"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBorderCorrect"
+            android:textSize="20dp"
+            android:padding="@dimen/button_padding"
+            />
+        <TextView
+            android:id="@+id/lesson_txtDateCompleted"
+            android:layout_toLeftOf="@id/lesson_txtCorrect"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/button_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/colorLabelBackground"/>
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/lesson_txtDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/button_padding"
+        android:textSize="20dp"
+        android:background="@color/colorLightYellow"
+        android:textAppearance="?attr/textAppearanceListItem" />
+</LinearLayout>

@@ -107,7 +107,7 @@ public class WritingFragment extends Fragment {
             mListener = (SlideCompletedListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnLessonFragmentInteractionListener");
         }
     }
 

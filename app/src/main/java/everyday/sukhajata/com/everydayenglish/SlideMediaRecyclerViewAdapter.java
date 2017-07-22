@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-//import everyday.sukhajata.com.everydayenglish.ItemFragment.OnListFragmentInteractionListener;
+//import everyday.sukhajata.com.everydayenglish.ItemFragment.OnLessonFragmentInteractionListener;
 //import everyday.sukhajata.com.everydayenglish.dummy.DummyContent.DummyItem;
 import everyday.sukhajata.com.everydayenglish.interfaces.SlideCompletedListener;
 import everyday.sukhajata.com.everydayenglish.model.SlideMedia;
