@@ -26,7 +26,7 @@ import everyday.sukhajata.com.everydayenglish.utility.EverydayLanguageDbHelper;
 import static everyday.sukhajata.com.everydayenglish.TotalsActivity.ARG_NAME_TOTAL;
 
 public class    MainActivity extends AppCompatActivity implements DownloadCallback,
-        AudioSetupCallback, AudioFinishedCallback, NextLessonListener{
+        AudioSetupCallback, AudioFinishedCallback, NextLessonListener, LessonFragment.OnLessonFragmentInteractionListener{
 
     public String imageUrl;
     public static final int USER_REQUEST_CODE = 1;
@@ -65,13 +65,18 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         if (user != null) {
             //proceed with only user
             //mCurrentUser = dbHelper.getUser();
+            boolean nextLessonCached = dbHelper.checkForLesson(user.LessonCompletedOrder + 1, user.ModuleId);
+            if (nextLessonCached) {
+                LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_content, lessonFragment)
+                        .commitAllowingStateLoss();
+            } else {
+
+            }
             ContentManager.syncUser(this, user.Id);
 
-            LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_content, lessonFragment)
-                    .commitAllowingStateLoss();
 
         } else  {
             //select user or create new
@@ -103,14 +108,21 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
     private void launchLesson(Lesson lesson) {
         Log.d("SUKH", "launching lesson " + lesson.Id);
-        Intent intent = new Intent(this, LessonActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(LessonActivity.ARG_NAME_LESSON, lesson);
-        //bundle.putString(LessonActivity.ARG_NAME_LESSON, lesson);
-        bundle.putString(LessonActivity.ARG_NAME_IMAGE_URL, imageUrl);
-        bundle.putInt(LessonActivity.ARG_NAME_USER_ID, mCurrentUser.Id);
-        intent.putExtra("bundle", bundle);
-        startActivityForResult(intent, LESSON_REQUEST_CODE);
+
+        User user = EverydayLanguageDbHelper
+                .getInstance(this)
+                .getActiveUser();
+
+        if (user != null) {
+            Intent intent = new Intent(this, LessonActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(LessonActivity.ARG_NAME_LESSON, lesson);
+            //bundle.putString(LessonActivity.ARG_NAME_LESSON, lesson);
+            bundle.putString(LessonActivity.ARG_NAME_IMAGE_URL, imageUrl);
+            bundle.putInt(LessonActivity.ARG_NAME_USER_ID, user.Id);
+            intent.putExtra("bundle", bundle);
+            startActivityForResult(intent, LESSON_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -157,6 +169,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
     @Override
     public void onDownloadFinished(String code, boolean launch) {
+        /*
         Log.d("SUKH", "Download finished: " + code);
         if (mWaitingForLessons || mWaitingForSlides) {
             if(code.equals(DownloadCallback.TYPE_SLIDES)) {
@@ -180,7 +193,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             }
         }
 
-
+*/
     }
 
     public void onDownloadResult(String code, String type, String[] args) {
@@ -277,7 +290,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         }
     }
 
-    private void startLessonSync(boolean launch) {
+    private void startLessonSync () {
+    /*c(boolean launch) {
 
         mLesson = EverydayLanguageDbHelper
                 .getInstance(this)
@@ -303,10 +317,11 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         int lastOrder = EverydayLanguageDbHelper
                 .getInstance(this)
                 .getLastLessonOrder(mCurrentUser.Id, mCurrentUser.CurrentLessonId);
-        */
+
 
         ContentManager.syncData(getApplicationContext(), this, imageUrl,
                 mCurrentUser.Id, launch);
+    */
     }
 
     @Override
@@ -485,7 +500,17 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ContentManager.releaseResources();
+        //ContentManager.releaseResources();
+    }
+
+    @Override
+    public void onListFragmentInteraction(Lesson item) {
+
+        Lesson lesson = EverydayLanguageDbHelper
+                .getInstance(this)
+                .getLesson(item.Id);
+
+        launchLesson(lesson);
     }
 
 }
