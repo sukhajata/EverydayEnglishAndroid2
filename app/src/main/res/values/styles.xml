@@ -28,13 +28,14 @@
     </style>
 
     <style name="LabelTarget">
-        <item name="android:background">@color/colorPrimaryLight</item>
+        <item name="android:background">@color/colorLabelBackground</item>
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:textSize">@dimen/text_size_target</item>
     </style>
 
     <style name="SelectableButton">
-        <item name="android:background">@color/colorLabelBackground</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorLabelBackground</item>
         <item name="android:padding">@dimen/button_padding</item>
     </style>
 
