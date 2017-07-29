@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import everyday.sukhajata.com.everydayenglish.interfaces.SlideCompletedListener;
+import everyday.sukhajata.com.everydayenglish.model.Slide;
+import everyday.sukhajata.com.everydayenglish.model.SlideMedia;
 
 
 /**
@@ -21,6 +25,9 @@ import everyday.sukhajata.com.everydayenglish.interfaces.SlideCompletedListener;
  */
 public class ConversationFragment extends Fragment {
 
+    private Slide mSlide;
+    private String mImageUrl;
+    private View mLayout;
 
     private SlideCompletedListener mListener;
 
@@ -32,15 +39,15 @@ public class ConversationFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param slide Parameter 1.
+     * @param imageUrl Parameter 2.
      * @return A new instance of fragment ConversationFragment.
      */
-    public static ConversationFragment newInstance(String param1, String param2) {
+    public static ConversationFragment newInstance(Slide slide, String imageUrl) {
         ConversationFragment fragment = new ConversationFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelable(LessonActivity.ARG_NAME_SLIDE, slide);
+        args.putString(LessonActivity.ARG_NAME_IMAGE_URL, imageUrl);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,8 +56,8 @@ public class ConversationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mImageUrl = getArguments().getString(LessonActivity.ARG_NAME_IMAGE_URL);
+            mSlide = getArguments().getParcelable(LessonActivity.ARG_NAME_SLIDE);
         }
     }
 
@@ -58,7 +65,18 @@ public class ConversationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_conversation, container, false);
+        View view =  inflater.inflate(R.layout.fragment_conversation, container, false);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(0, 30, 0 , 0);
+
+        for (SlideMedia slideMedia : mSlide.MediaList) {
+            LinearLayout linearLayout = new LinearLayout(getActivity());
+            linearLayout.setLayoutParams(layoutParams);
+
+        }
+
+        return view;
     }
 
 
