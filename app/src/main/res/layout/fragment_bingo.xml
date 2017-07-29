@@ -9,18 +9,29 @@
     android:layout_margin="@dimen/button_padding"
     tools:context="everyday.sukhajata.com.everydayenglish.BingoFragment">
 
-    <TextView
-        android:id="@+id/bingo_txtTarget"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/LabelTarget"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/bingo_speaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_speaker"/>
+        <TextView
+            android:id="@+id/bingo_txtTarget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/bingo_speaker"
+            android:layout_centerVertical="true"
+            style="@style/LabelTarget"/>
+    </RelativeLayout>
 
     <com.google.android.flexbox.flexboxlayout
         android:id="@+id/bingo_flexbox"
         android:layout_below="@id/bingo_txtTarget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:flexwrap="wrap">
+        app:flexWrap="wrap">
         <FrameLayout
             android:id="@+id/bingo_frame1"
             android:layout_height="wrap_content"
@@ -126,6 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
         android:layout_marginTop="15dp"/>
     <!--
         <FrameLayout

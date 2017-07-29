@@ -100,19 +100,12 @@ public class MatchingPairsImageTextFragment extends Fragment {
         final FrameLayout frame2 = (FrameLayout)layout.findViewById(R.id.matchingPairsImageText_frame2);
         setupButton(btn2, mPage.MediaList.get(1), frame2);
 
-        final Button btn3 = (Button)layout.findViewById(R.id.buttonText3);
-        final FrameLayout frame3 = (FrameLayout)layout.findViewById(R.id.matchingPairsImageText_frame3);
-        setupButton(btn3, mPage.MediaList.get(2), frame3);
-
-        final Button btn4 = (Button)layout.findViewById(R.id.buttonText4);
-        final FrameLayout frame4 = (FrameLayout)layout.findViewById(R.id.matchingPairsImageText_frame4);
-        setupButton(btn4, mPage.MediaList.get(3), frame4);
 
         //shuffle list
         long seed = System.nanoTime();
         Collections.shuffle(mPage.MediaList, new Random(seed));
 
-        //images and thai text
+        //thai text
         final ImageView imgBtn1 = (ImageView)layout.findViewById(R.id.matchingPairsImageText_imageView1);
         TextView txtView1 = (TextView)layout.findViewById(R.id.matchingPairsImageText_textView1);
         final FrameLayout imgFrame1 = (FrameLayout)layout.findViewById(R.id.matchingPairsImageText_frame5);
@@ -172,7 +165,7 @@ public class MatchingPairsImageTextFragment extends Fragment {
 
         mSelectedTextFrame = frame;
         mSelectedTextPhrase = (SlideMedia)button.getTag();
-        ContentManager.playAudio(mSelectedTextPhrase.English, mSelectedTextPhrase.AudioFileName);
+        ContentManager.playAudio(getActivity(), mSelectedTextPhrase.English);
 
         frame.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(), R.color.colorBorderSelected, null));
 

@@ -17,7 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_speaker"
-                 />
+                />
             <TextView
                 android:id="@+id/missingWord_textContent"
                 android:layout_toRightOf="@id/missingWord_speaker"
@@ -26,58 +26,58 @@
                 android:layout_centerVertical="true"
                 style="@style/LabelTarget"/>
         </RelativeLayout>
-    <TextView
-        android:id="@+id/missingWord_textContentThai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryLight"
-        android:textSize="18dp"
-        android:padding="@dimen/button_padding"/>
+        <TextView
+            android:id="@+id/missingWord_textContentThai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight"
+            android:textSize="18dp"
+            android:padding="@dimen/button_padding"/>
 
-    <FrameLayout
-        android:id="@+id/missingWord_frame1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
-        <Button
-            android:id="@+id/missingWord_buttonChoice1"
+        <FrameLayout
+            android:id="@+id/missingWord_frame1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/SelectableButton"/>
-    </FrameLayout>
-    <FrameLayout
-        android:id="@+id/missingWord_frame2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
-        <Button
-            android:id="@+id/missingWord_buttonChoice2"
+            android:padding="@dimen/button_border">
+            <Button
+                android:id="@+id/missingWord_buttonChoice1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/missingWord_frame2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/SelectableButton"/>
-    </FrameLayout>
-    <FrameLayout
-        android:id="@+id/missingWord_frame3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
-        <Button
-            android:id="@+id/missingWord_buttonChoice3"
+            android:padding="@dimen/button_border">
+            <Button
+                android:id="@+id/missingWord_buttonChoice2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/missingWord_frame3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/SelectableButton"/>
-    </FrameLayout>
-    <FrameLayout
-        android:id="@+id/missingWord_frame4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
-        <Button
-            android:id="@+id/missingWord_buttonChoice4"
+            android:padding="@dimen/button_border">
+            <Button
+                android:id="@+id/missingWord_buttonChoice3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/missingWord_frame4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/SelectableButton"/>
-    </FrameLayout>
+            android:padding="@dimen/button_border">
+            <Button
+                android:id="@+id/missingWord_buttonChoice4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/missingWord_image"

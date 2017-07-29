@@ -93,33 +93,18 @@ public class MatchingPairsTextFragment extends Fragment {
         Button btn2 = (Button)layout.findViewById(R.id.matchingPairsText_buttonText2);
         setupEnglishButton(btn2, mPage.MediaList.get(1), frame2);
 
-        FrameLayout frame3 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame3);
-        Button btn3 = (Button)layout.findViewById(R.id.matchingPairsText_buttonText3);
-        setupEnglishButton(btn3, mPage.MediaList.get(2), frame3);
-
-        FrameLayout frame4 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame4);
-        Button btn4 = (Button)layout.findViewById(R.id.matchingPairsText_buttonText4);
-        setupEnglishButton(btn4, mPage.MediaList.get(3), frame4);
 
         //shuffle list
         long seed = System.nanoTime();
         Collections.shuffle(mPage.MediaList, new Random(seed));
 
-        FrameLayout frame5 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame5);
-        Button btn5 = (Button)layout.findViewById(R.id.matchingPairsText_buttonText5);
-        setupThaiButton(btn5, mPage.MediaList.get(0), frame5);
+        FrameLayout frame3 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame3);
+        Button btn5 = (Button)layout.findViewById(R.id.matchingPairsText_buttonThai1);
+        setupThaiButton(btn5, mPage.MediaList.get(0), frame3);
 
-        FrameLayout frame6 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame6);
-        Button btn6 = (Button)layout.findViewById(R.id.matchingPairsText_buttonText6);
-        setupThaiButton(btn6, mPage.MediaList.get(1), frame6);
-
-        FrameLayout frame7 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame7);
-        Button btn7 = (Button)layout.findViewById(R.id.matchingPairsText_buttonText7);
-        setupThaiButton(btn7, mPage.MediaList.get(2), frame7);
-
-        FrameLayout frame8 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame8);
-        Button btn8 = (Button)layout.findViewById(R.id.matchingPairsText_buttonText8);
-        setupThaiButton(btn8, mPage.MediaList.get(3), frame8);
+        FrameLayout frame4 = (FrameLayout)layout.findViewById(R.id.matchingPairsText_frame4);
+        Button btn6 = (Button)layout.findViewById(R.id.matchingPairsText_buttonThai2);
+        setupThaiButton(btn6, mPage.MediaList.get(1), frame4);
 
         mImageView  = (ImageView)mLayout.findViewById(R.id.matchingPairsText_image);
 
@@ -160,7 +145,7 @@ public class MatchingPairsTextFragment extends Fragment {
                 mSelectedEnglishPhrase.ImageFileName, mImageUrl);
         mImageView.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(),
                 R.color.colorLabelBackground, null));
-        ContentManager.playAudio(mSelectedEnglishPhrase.English, mSelectedEnglishPhrase.AudioFileName);
+        ContentManager.playAudio(getActivity(), mSelectedEnglishPhrase.English);
         mSelectedEnglishFrame.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(), R.color.colorBorderSelected, null));
 
         if (mSelectedThaiFrame != null) {

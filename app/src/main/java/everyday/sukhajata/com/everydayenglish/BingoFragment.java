@@ -91,6 +91,14 @@ public class BingoFragment extends Fragment {
         long seed = System.nanoTime();
         Collections.shuffle(mSlide.MediaList, new Random(seed));
 
+        ImageView speaker = (ImageView)layout.findViewById(R.id.bingo_speaker);
+        speaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ContentManager.playAudio(getActivity(), targetWord.English);
+            }
+        });
+
 
         FrameLayout frame1 = (FrameLayout)layout.findViewById(R.id.bingo_frame1);
         Button btn1 = (Button)layout.findViewById(R.id.bingo_button1);
@@ -212,7 +220,7 @@ public class BingoFragment extends Fragment {
         } else {
             imgTarget.setImageResource(android.R.color.transparent);
         }
-        ContentManager.playAudio(targetWord.English, null);
+        ContentManager.playAudio(getActivity(), targetWord.English);
     }
 
     private void removeFrame(final FrameLayout frame) {

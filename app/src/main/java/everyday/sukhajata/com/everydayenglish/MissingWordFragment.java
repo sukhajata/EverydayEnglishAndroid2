@@ -112,7 +112,7 @@ public class MissingWordFragment extends Fragment {
         txtContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(sentence, null);
+                ContentManager.playAudio(getActivity(), sentence);
             }
         });
 
@@ -120,7 +120,7 @@ public class MissingWordFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(sentence, null);
+                ContentManager.playAudio(getActivity(), sentence);
             }
         });
 
@@ -156,7 +156,7 @@ public class MissingWordFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ContentManager.playAudio(mSentence, null);
+        ContentManager.playAudio(getActivity(), mSentence);
     }
 
     private void setupTextButton (Button button, final FrameLayout frame,

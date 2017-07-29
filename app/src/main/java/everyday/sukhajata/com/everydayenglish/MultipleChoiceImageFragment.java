@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.internal.Utility;
-
 import java.util.Collections;
 import java.util.Random;
 
@@ -99,7 +97,7 @@ public class MultipleChoiceImageFragment extends Fragment {
         txtTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(mTarget.English, mTarget.AudioFileName);
+                ContentManager.playAudio(getActivity(), mTarget.English);
             }
         });
 
@@ -107,7 +105,7 @@ public class MultipleChoiceImageFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(mTarget.English, mTarget.AudioFileName);
+                ContentManager.playAudio(getActivity(), mTarget.English);
             }
         });
 
@@ -127,9 +125,6 @@ public class MultipleChoiceImageFragment extends Fragment {
         ImageView img3 = (ImageView)layout.findViewById(R.id.multipleChoiceImage_imageView3);
         setupImageView(img3, mPage.MediaList.get(2), frame3);
 
-        FrameLayout frame4 = (FrameLayout)layout.findViewById(R.id.multipleChoiceImage_frame4);
-        ImageView img4 = (ImageView)layout.findViewById(R.id.multipleChoiceImage_imageView4);
-        setupImageView(img4, mPage.MediaList.get(3), frame4);
 
         //play audio
 
@@ -171,7 +166,7 @@ public class MultipleChoiceImageFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ContentManager.playAudio( mTarget.English, mTarget.AudioFileName);
+        ContentManager.playAudio(getActivity(), mTarget.English);
     }
 
     @Override

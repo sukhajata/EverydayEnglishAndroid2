@@ -113,19 +113,13 @@ public class MatchingPairsImageFragment extends Fragment implements AudioFinishe
         final FrameLayout frame2 = (FrameLayout)layout.findViewById(R.id.matchingPairsImage_frame2);
         setupButton(btn2, mPage.MediaList.get(1), frame2);
 
-        final Button btn3 = (Button)layout.findViewById(R.id.matchingPairsImage_buttonText3);
-        final FrameLayout frame3 = (FrameLayout)layout.findViewById(R.id.matchingPairsImage_frame3);
-        setupButton(btn3, mPage.MediaList.get(2), frame3);
 
-        final Button btn4 = (Button)layout.findViewById(R.id.matchingPairsImage_buttonText4);
-        final FrameLayout frame4 = (FrameLayout)layout.findViewById(R.id.matchingPairsImage_frame4);
-        setupButton(btn4, mPage.MediaList.get(3), frame4);
 
         //shuffle list
         long seed = System.nanoTime();
         Collections.shuffle(mPage.MediaList, new Random(seed));
 
-        //images and thai text
+        //images
         final ImageView imgBtn1 = (ImageView)layout.findViewById(R.id.matchingPairsImage_imageView1);
         final FrameLayout imgFrame1 = (FrameLayout)layout.findViewById(R.id.matchingPairsImage_frame5);
         setupImageView(imgBtn1, mPage.MediaList.get(0), imgFrame1);
@@ -134,13 +128,7 @@ public class MatchingPairsImageFragment extends Fragment implements AudioFinishe
         final FrameLayout imgFrame2 = (FrameLayout)layout.findViewById(R.id.matchingPairsImage_frame6);
         setupImageView(imgBtn2, mPage.MediaList.get(1), imgFrame2);
 
-        final ImageView imgBtn3 = (ImageView)layout.findViewById(R.id.matchingPairsImage_imageView3);
-        final FrameLayout imgFrame3 = (FrameLayout)layout.findViewById(R.id.matchingPairsImage_frame7);
-        setupImageView(imgBtn3,  mPage.MediaList.get(2), imgFrame3);
 
-        final ImageView imgBtn4 = (ImageView)layout.findViewById(R.id.matchingPairsImage_imageView4);
-        final FrameLayout imgFrame4 = (FrameLayout)layout.findViewById(R.id.matchingPairsImage_frame8);
-        setupImageView(imgBtn4, mPage.MediaList.get(3), imgFrame4);
 
         return layout;
     }
@@ -183,8 +171,8 @@ public class MatchingPairsImageFragment extends Fragment implements AudioFinishe
 
         audioQueue.add(mSelectedTextPhrase.English);
         ContentManager.playAudio(
-                mSelectedTextPhrase.English,
-                mSelectedTextPhrase.AudioFileName);
+                getActivity(),
+                mSelectedTextPhrase.English);
 
         if (mSelectedImagePhrase != null) {
 

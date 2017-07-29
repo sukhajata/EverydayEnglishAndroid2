@@ -93,7 +93,7 @@ public class MultipleChoiceTextFragment extends Fragment {
         txtContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(mTarget.English, mTarget.AudioFileName);
+                ContentManager.playAudio(getActivity(), mTarget.English);
             }
         });
 
@@ -101,7 +101,7 @@ public class MultipleChoiceTextFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(mTarget.English, mTarget.AudioFileName);
+                ContentManager.playAudio(getActivity(), mTarget.English);
             }
         });
 
@@ -158,7 +158,7 @@ public class MultipleChoiceTextFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ContentManager.playAudio(mTarget.English, mTarget.AudioFileName);
+        ContentManager.playAudio(getActivity(), mTarget.English);
     }
 
     @Override

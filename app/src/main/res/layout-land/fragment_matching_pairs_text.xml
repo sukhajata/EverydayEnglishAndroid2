@@ -1,0 +1,78 @@
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorLabelBackground">
+    <LinearLayout
+        android:id="@+id/matchingPairsText_leftPanel"
+        android:layout_height="match_parent"
+        app:layout_widthPercent="50%"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/matchingPairsText_frame1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/button_border">
+            <Button
+                android:id="@+id/matchingPairsText_buttonText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButtonLight" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/matchingPairsText_frame2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/button_border">
+            <Button
+                android:id="@+id/matchingPairsText_buttonText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButtonLight" />
+        </FrameLayout>
+        <ImageView
+            android:id="@+id/matchingPairsText_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        app:layout_widthPercent="50%"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/matchingPairsText_leftPanel">
+
+        <FrameLayout
+            android:id="@+id/matchingPairsText_frame3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/button_border">
+            <Button
+                android:id="@+id/matchingPairsText_buttonThai1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/matchingPairsText_frame4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/button_border"
+            android:layout_marginBottom="@dimen/spacer">
+            <Button
+                android:id="@+id/matchingPairsText_buttonThai2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</android.support.percent.PercentRelativeLayout>
