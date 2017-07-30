@@ -17,7 +17,7 @@
     <string name="lesson_completed">บทเรียนเสร็จสิ้น</string>
     <string name="wrong_password">รหัสผ่านไม่ถูกต้อง</string>
     <string name="downloading_lessons">ดาวน์โหลดบทเรียน</string>
-
+    <string name="dont_know">ไม่ทราบ</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

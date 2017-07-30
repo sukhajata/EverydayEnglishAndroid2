@@ -10,7 +10,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -120,6 +119,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             //bundle.putString(LessonActivity.ARG_NAME_LESSON, lesson);
             bundle.putString(LessonActivity.ARG_NAME_IMAGE_URL, imageUrl);
             bundle.putInt(LessonActivity.ARG_NAME_USER_ID, user.Id);
+            bundle.putInt(LessonActivity.ARG_NAME_MODULE_ID, user.ModuleId);
             intent.putExtra("bundle", bundle);
             startActivityForResult(intent, LESSON_REQUEST_CODE);
         }
@@ -211,7 +211,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                         mCurrentUser.CurrentLessonId = currentLesson;
                         EverydayLanguageDbHelper
                                 .getInstance(this)
-                                .updateCurrentLesson(mCurrentUser.Id,
+                                .updateLessonCompleted(mCurrentUser.Id,
                                         mCurrentUser.CurrentLessonId);
 
 
@@ -411,9 +411,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
                 switch (finishType) {
                     case LessonActivity.FINISH_TYPE_LESSON_COMPLETED:
-                       // EverydayLanguageDbHelper
-                        //        .getInstance(getApplicationContext())
-                          //      .updateCurrentLesson(mUserId, mLesson.Id);
+
                         ContentManager.syncUser(this, this, mCurrentUser.Id, mLesson.Id,
                                 false, false);
                         intent = new Intent(this, TotalsActivity.class);

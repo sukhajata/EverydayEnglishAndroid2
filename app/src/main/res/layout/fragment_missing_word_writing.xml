@@ -1,0 +1,36 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorLabelBackground"
+    tools:context="everyday.sukhajata.com.everydayenglish.MissingWordWritingFragment"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/missingWordWriting_txtTarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LabelTarget"/>
+    <EditText
+        android:id="@+id/missingWordWriting_txtWriting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/missingWordWriting_txtTarget"
+        android:background="@color/colorAccent"
+        android:textSize="18dp"
+        android:padding="5dp"
+        android:layout_marginTop="@dimen/button_border"/>
+
+    <Button
+        android:id="@+id/missingWordWriting_btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/NavigationButton"
+        android:text="@string/dont_know"
+        android:background="@color/colorBorderWrong"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

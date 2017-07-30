@@ -46,6 +46,13 @@
         <item name="android:padding">@dimen/button_padding</item>
     </style>
 
+    <style name="SelectableButtonThai">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/colorLabelBackground</item>
+        <item name="android:padding">@dimen/button_padding</item>
+    </style>
+
     <style name="SelectableButtonLight">
         <item name="android:background">@color/colorPrimaryLight</item>
         <item name="android:textSize">16dp</item>

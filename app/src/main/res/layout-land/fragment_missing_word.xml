@@ -30,9 +30,7 @@
             android:id="@+id/missingWord_textContentThai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryLight"
-            android:textSize="18dp"
-            android:padding="@dimen/button_padding"/>
+            style="@style/LabelTargetThai"/>
 
         <FrameLayout
             android:id="@+id/missingWord_frame1"

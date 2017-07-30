@@ -3,25 +3,17 @@ package everyday.sukhajata.com.everydayenglish;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -30,7 +22,6 @@ import everyday.sukhajata.com.everydayenglish.interfaces.AudioSetupCallback;
 import everyday.sukhajata.com.everydayenglish.interfaces.SlideCompletedListener;
 import everyday.sukhajata.com.everydayenglish.model.Lesson;
 import everyday.sukhajata.com.everydayenglish.model.Slide;
-import everyday.sukhajata.com.everydayenglish.utility.ContentManager;
 import everyday.sukhajata.com.everydayenglish.utility.EverydayLanguageDbHelper;
 
 public class LessonActivity extends AppCompatActivity
@@ -41,6 +32,7 @@ public class LessonActivity extends AppCompatActivity
     public static final String ARG_NAME_SLIDE = "Slide";
     public static final String ARG_NAME_INSTRUCTIONS = "Instructions";
     public static final String ARG_NAME_USER_ID = "UserID";
+    public static final String ARG_NAME_MODULE_ID = "ModuleId";
     public static final String ARG_NAME_FINISH_TYPE = "FinishType";
 
     public static final int FINISH_TYPE_LESSON_COMPLETED = 1;
@@ -57,6 +49,7 @@ public class LessonActivity extends AppCompatActivity
     private Lesson mLesson;
     private String mImageUrl;
     private int mCurrentSlide;
+    private int mModuleId;
     private Fragment mCurrentFragment;
 
 
@@ -65,50 +58,54 @@ public class LessonActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson2);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.lesson_toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.lesson_toolbar);
+        //setSupportActionBar(toolbar);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
         //bundle.setClassLoader(Lesson.class.getClassLoader());
         mLesson = bundle.getParcelable(ARG_NAME_LESSON);
+        mImageUrl = bundle.getString(ARG_NAME_IMAGE_URL);
+        mUserId = bundle.getInt(ARG_NAME_USER_ID);
+        mModuleId = bundle.getInt(ARG_NAME_MODULE_ID);
+
+        //check if user has already started this lesson
+        mCurrentSlide = EverydayLanguageDbHelper
+                .getInstance(this)
+                .getSlideCompleted(mUserId, mLesson.Id) - 1;
+
+        if (mCurrentSlide >= mLesson.Pages.size()) {
+            mCurrentSlide = 0;
+        }
+
+        //show stars
+        for (int i = 0; i < mCurrentSlide; i++) {
+            ImageView imageView = new ImageView(this);
+            imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.mipmap.ic_star_gold, null));
+            
+        }
+
+        //if this lesson has already been completed, remove values from slideCompleted table
+        EverydayLanguageDbHelper
+                .getInstance(this)
+                .checkClearSlideCompleted(mUserId, mModuleId, mLesson.Id, mLesson.LessonOrder);
 
         //initialize text to speech
         //check english-US tts loaded
         //ContentManager.setupAudio(getApplicationContext(), this, this);
 
+        /*
         for (Slide slide: mLesson.Pages) {
             Log.d("SUKH", "lesson content slide: " + String.valueOf(slide.Id) + ", cat: " +
                 String.valueOf(slide.CatId));
         }
+        */
+
 
         //Log.d("LESSON", "Lesson " + String.valueOf(lesson.Id) + " received by lesson activity");
-        mImageUrl = bundle.getString(ARG_NAME_IMAGE_URL);
-        mUserId = bundle.getInt(ARG_NAME_USER_ID);
-        mCurrentSlide = 0;
+
         moveNext();
-
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
-
-        // Instantiate a ViewPager and a PagerAdapter.
-        /*
-        mPager = (NonSwipeableViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new LessonPagerAdapter(
-                this, getSupportFragmentManager(), mLesson, imageUrl);
-        mPager.setAdapter(mPagerAdapter);
-*/
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
     }
 
@@ -162,6 +159,15 @@ public class LessonActivity extends AppCompatActivity
             case 15:
                 mCurrentFragment = BingoFragment.newInstance(slide, mImageUrl);
                 break;
+            case 16:
+                mCurrentFragment = ConversationFragment.newInstance(slide, mImageUrl);
+                break;
+            case 17:
+                mCurrentFragment = QuestionFragment.newInstance(slide, mImageUrl);
+                break;
+            case 18:
+                mCurrentFragment = ListeningFragment.newInstance(slide, mImageUrl);
+                break;
         }
 
         mCurrentFragment.onAttach(this);
@@ -214,7 +220,7 @@ public class LessonActivity extends AppCompatActivity
                 /*
                 EverydayLanguageDbHelper
                         .getInstance(getApplicationContext())
-                        .updateCurrentLesson(mUserId, mLesson.Id);
+                        .updateLessonCompleted(mUserId, mLesson.Id);
                         */
                 intent.putExtra(ARG_NAME_FINISH_TYPE, FINISH_TYPE_LESSON_COMPLETED);
                 setResult(Activity.RESULT_OK, intent);
@@ -230,6 +236,10 @@ public class LessonActivity extends AppCompatActivity
     }
 
     public void onSlideCompleted(int slideId, int errors) {
+        EverydayLanguageDbHelper
+                .getInstance(this)
+                .updateSlideCompleted(mUserId, mLesson.Id, mCurrentSlide, errors);
+
         if (errors > 1) {
             moveNext();
         } else {
@@ -237,6 +247,10 @@ public class LessonActivity extends AppCompatActivity
             if (mCurrentSlide < mLesson.Pages.size()) {
                 moveNext();
             } else {
+                EverydayLanguageDbHelper
+                        .getInstance(getApplicationContext())
+                        .updateLessonCompleted(mUserId, mModuleId, mLesson.Id, mLesson.LessonOrder);
+
                 Intent intent = new Intent();
                 intent.putExtra(ARG_NAME_FINISH_TYPE, FINISH_TYPE_LESSON_COMPLETED);
                 setResult(Activity.RESULT_OK, intent);
@@ -250,7 +264,7 @@ public class LessonActivity extends AppCompatActivity
             //mPager.setCurrentItem(currentItem + 1);
         } catch (Exception ex) {
             EverydayLanguageDbHelper.getInstance(getApplicationContext())
-                    .updateCurrentLesson(mUserId, mLesson.Id);
+                    .updateLessonCompleted(mUserId, mLesson.Id);
 
             setResult(RESULT_OK);
             finish();

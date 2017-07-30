@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorLabelBackground"
     tools:context="everyday.sukhajata.com.everydayenglish.WritingFragment"
     android:padding="@dimen/activity_horizontal_margin">
 
@@ -12,14 +12,14 @@
         android:id="@+id/writing_txtTarget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_target"
-        android:padding="@dimen/button_padding"
-        android:background="@color/colorLabelBackground"/>
+       style="@style/LabelTarget"/>
     <EditText
         android:id="@+id/writing_txtWriting"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorAccent"
+        android:textSize="18dp"
+        android:padding="5dp"
         android:layout_marginTop="@dimen/button_border"/>
 
 </LinearLayout>
