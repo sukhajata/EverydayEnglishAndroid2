@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,9 @@ import everyday.sukhajata.com.everydayenglish.interfaces.AudioFinishedCallback;
 import everyday.sukhajata.com.everydayenglish.interfaces.AudioSetupCallback;
 import everyday.sukhajata.com.everydayenglish.interfaces.SlideCompletedListener;
 import everyday.sukhajata.com.everydayenglish.model.Lesson;
+import everyday.sukhajata.com.everydayenglish.model.LessonCompleted;
 import everyday.sukhajata.com.everydayenglish.model.Slide;
+import everyday.sukhajata.com.everydayenglish.utility.ContentManager;
 import everyday.sukhajata.com.everydayenglish.utility.EverydayLanguageDbHelper;
 
 public class LessonActivity extends AppCompatActivity
@@ -51,6 +54,7 @@ public class LessonActivity extends AppCompatActivity
     private int mCurrentSlide;
     private int mModuleId;
     private Fragment mCurrentFragment;
+    //private ArrayList<ImageView> stars;
 
 
     @Override
@@ -69,6 +73,7 @@ public class LessonActivity extends AppCompatActivity
         mImageUrl = bundle.getString(ARG_NAME_IMAGE_URL);
         mUserId = bundle.getInt(ARG_NAME_USER_ID);
         mModuleId = bundle.getInt(ARG_NAME_MODULE_ID);
+//        stars = new ArrayList<>();
 
         //check if user has already started this lesson
         mCurrentSlide = EverydayLanguageDbHelper
@@ -79,11 +84,18 @@ public class LessonActivity extends AppCompatActivity
             mCurrentSlide = 0;
         }
 
+        LinearLayout progressPanel = (LinearLayout) findViewById(R.id.lesson_progressBar);
         //show stars
         for (int i = 0; i < mCurrentSlide; i++) {
             ImageView imageView = new ImageView(this);
-            imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.mipmap.ic_star_gold, null));
-            
+            imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_gold, null));
+            progressPanel.addView(imageView);
+        }
+
+        for (int i = mCurrentSlide; i < mLesson.Pages.size(); i++) {
+            ImageView imageView = new ImageView(this);
+            imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_white, null));
+            progressPanel.addView(imageView);
         }
 
         //if this lesson has already been completed, remove values from slideCompleted table
@@ -240,9 +252,14 @@ public class LessonActivity extends AppCompatActivity
                 .getInstance(this)
                 .updateSlideCompleted(mUserId, mLesson.Id, mCurrentSlide, errors);
 
+
         if (errors > 1) {
             moveNext();
         } else {
+            LinearLayout progressPanel = (LinearLayout)findViewById(R.id.lesson_progressBar);
+            ImageView star = (ImageView)progressPanel.getChildAt(mCurrentSlide);
+            star.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_gold, null));
+
             mCurrentSlide++;
             if (mCurrentSlide < mLesson.Pages.size()) {
                 moveNext();
@@ -253,7 +270,9 @@ public class LessonActivity extends AppCompatActivity
 
                 Intent intent = new Intent();
                 intent.putExtra(ARG_NAME_FINISH_TYPE, FINISH_TYPE_LESSON_COMPLETED);
+                intent.putExtra(ARG_NAME_LESSON, mLesson);
                 setResult(Activity.RESULT_OK, intent);
+
                 finish();
             }
         }
@@ -301,6 +320,13 @@ public class LessonActivity extends AppCompatActivity
         super.onStart();
         //ContentManager.setupAudio(getApplicationContext(), this, this);
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+    }
+
 
     @Override
     public void onStop() {

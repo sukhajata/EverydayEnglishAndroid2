@@ -20,6 +20,7 @@ public class Slide implements Parcelable{
     public String ContentThai;
     public int SlideOrder;
     public String ImageFileName;
+    public int LessonReference;
     public ArrayList<SlideMedia> MediaList;
     //public ArrayList<SlideWord> SlideWordList;
 
@@ -28,7 +29,7 @@ public class Slide implements Parcelable{
     }
     
     public Slide(int id, int lessonId, int catId, String content,
-                 String contentThai, int slideOrder, String imageFileName,
+                 String contentThai, int slideOrder, String imageFileName, int lessonReference,
                  ArrayList<SlideMedia> mediaList) {
         Id = id;
         LessonId = lessonId;
@@ -37,6 +38,7 @@ public class Slide implements Parcelable{
         ContentThai = contentThai;
         SlideOrder = slideOrder;
         ImageFileName = imageFileName;
+        LessonReference = lessonReference;
         MediaList = mediaList;
         //SlideWordList = slideWordList;
        // IsCompleted = false;
@@ -50,6 +52,7 @@ public class Slide implements Parcelable{
         ContentThai = in.readString();
         SlideOrder = in.readInt();
         ImageFileName = in.readString();
+        LessonReference = in.readInt();
         MediaList = new ArrayList<>();
         in.readTypedList(MediaList, SlideMedia.CREATOR);
         //SlideWordList = new ArrayList<>();
@@ -69,6 +72,7 @@ public class Slide implements Parcelable{
         out.writeString(ContentThai);
         out.writeInt(SlideOrder);
         out.writeString(ImageFileName);
+        out.writeInt(LessonReference);
         out.writeTypedList(MediaList);
         //out.writeTypedList(SlideWordList);
     }

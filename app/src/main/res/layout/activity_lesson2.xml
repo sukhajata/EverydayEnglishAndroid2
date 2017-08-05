@@ -8,33 +8,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/lesson_progressBar"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:background="@color/colorPrimaryDark">
-        <ImageView
-            android:id="@+id/kk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:src="@mipmap/ic_star_gold"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/kk"
-            android:src="@mipmap/ic_star_gold"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_star_gold"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_star_gold"/>
 
-    </RelativeLayout>
+
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/lesson_instructionsPanel"
         android:layout_width="match_parent"
@@ -46,11 +28,11 @@
             android:layout_centerHorizontal="true"/>
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
 
-            android:src="@mipmap/ic_home"/>
+            android:src="@drawable/ic_home"/>
     </RelativeLayout>
 
 </LinearLayout>

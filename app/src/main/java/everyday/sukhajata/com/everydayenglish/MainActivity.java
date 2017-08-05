@@ -18,6 +18,7 @@ import everyday.sukhajata.com.everydayenglish.interfaces.AudioSetupCallback;
 import everyday.sukhajata.com.everydayenglish.interfaces.DownloadCallback;
 import everyday.sukhajata.com.everydayenglish.interfaces.NextLessonListener;
 import everyday.sukhajata.com.everydayenglish.model.Lesson;
+import everyday.sukhajata.com.everydayenglish.model.LessonCompleted;
 import everyday.sukhajata.com.everydayenglish.model.User;
 import everyday.sukhajata.com.everydayenglish.utility.ContentManager;
 import everyday.sukhajata.com.everydayenglish.utility.EverydayLanguageDbHelper;
@@ -72,9 +73,13 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                         .replace(R.id.main_content, lessonFragment)
                         .commitAllowingStateLoss();
             } else {
+                int lastLessonId = EverydayLanguageDbHelper
+                        .getInstance(this)
+                        .getLastLessonId();
 
+                ContentManager.downloadLessons(this, lastLessonId, this);
             }
-            ContentManager.syncUser(this, user.Id);
+            ContentManager.pullLessonsCompleted(this, user.Id, user.ModuleId, user.LessonCompletedOrder, this);
 
 
         } else  {
@@ -168,7 +173,22 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     }
 
     @Override
-    public void onDownloadFinished(String code, boolean launch) {
+    public void onDownloadFinished(String code, String type) {
+        if (code.equals(DownloadCallback.RESPONSE_OK)) {
+            if (type.equals(DownloadCallback.TYPE_LESSONS)) {
+                User user = EverydayLanguageDbHelper
+                        .getInstance(this)
+                        .getActiveUser();
+
+                if (user != null) {
+                    LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_content, lessonFragment)
+                            .commitAllowingStateLoss();
+                }
+            }
+        }
         /*
         Log.d("SUKH", "Download finished: " + code);
         if (mWaitingForLessons || mWaitingForSlides) {
@@ -199,8 +219,9 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     public void onDownloadResult(String code, String type, String[] args) {
 
             if (code.equals(DownloadCallback.RESPONSE_OK)) {
-                if (type.equals(DownloadCallback.TYPE_SYNC_USER)) {
+                if (type.equals(DownloadCallback.TYPE_PUSH_LESSON_COMPLETED)) {
                     try {
+                        /*
                         int userId = Integer.valueOf(args[0]);
                         int currentLesson = Integer.valueOf(args[1]);
                         boolean launch = Boolean.valueOf(args[2]);
@@ -216,9 +237,20 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
 
                         startLessonSync(launch);
+                        */
                     } catch (NumberFormatException ex) {
                         onDownloadError(args[0]);
                     }
+                } else if (type.equals(DownloadCallback.TYPE_TOTALS)) {
+                    int wordTotal = Integer.valueOf(args[0]);
+                    double percentage = Double.valueOf(args[1]);
+
+                    TotalsFragment totalsFragment = TotalsFragment.newInstance(wordTotal, percentage);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_content, totalsFragment)
+                            .commitAllowingStateLoss();
+
                 } else if (type.equals(DownloadCallback.TYPE_USER)) {
                     try {
 
@@ -233,6 +265,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                             intent.putExtra(SetupActivity.ARG_WRONG_PASSWORD, true);
                             startActivityForResult(intent, USER_REQUEST_CODE);
                         } else {
+                            /*
                             Log.d("SUKH", "user id: " + args[0]);
                             int currentLessonId = Integer.valueOf(args[1]);
                             String email = args[2];
@@ -242,6 +275,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                                     .getInstance(getApplicationContext())
                                     .checkInsertUser(id, email, password, currentLessonId);
                             startLessonSync(true);
+                            */
                             //ContentManager.syncUser(this, this, mCurrentUser.Id);
 
                             /*
@@ -335,8 +369,9 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                         .checkUser(email, password);
 
                 if (result == EverydayLanguageDbHelper.USER_NOT_EXISTS) {
+                    /*
                     ContentManager.getUserId(getApplicationContext(), email, password, this);
-
+                    */
                 } else if (result == EverydayLanguageDbHelper.USER_WRONG_PASSWORD) {
                     int numUsers = EverydayLanguageDbHelper
                             .getInstance(this)
@@ -347,11 +382,12 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                     startActivityForResult(intent, USER_REQUEST_CODE);
 
                 } else if (result == EverydayLanguageDbHelper.USER_EXISTS_CORRECT_PASSWORD) {
+                    /*
                     mCurrentUser = EverydayLanguageDbHelper
                             .getInstance(this)
                             .getUser(email);
                     ContentManager.syncUser(this, this, mCurrentUser.Id, 0, false, true);
-
+                    */
                     /*
                     mLesson = EverydayLanguageDbHelper
                             .getInstance(this)
@@ -382,7 +418,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             }
        } else if (requestCode == TOTALS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                startLessonSync(true);
+                //startLessonSync(true);
                 //ContentManager.syncUser(this, this, mCurrentUser.Id, 0, false);
 
                 /*
@@ -411,12 +447,34 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
                 switch (finishType) {
                     case LessonActivity.FINISH_TYPE_LESSON_COMPLETED:
+                        User user = EverydayLanguageDbHelper
+                                .getInstance(this)
+                                .getActiveUser();
 
-                        ContentManager.syncUser(this, this, mCurrentUser.Id, mLesson.Id,
-                                false, false);
-                        intent = new Intent(this, TotalsActivity.class);
-                        intent.putExtra(ARG_NAME_TOTAL, mLesson.ReviewStartOrder);
-                        startActivityForResult(intent, TOTALS_REQUEST_CODE);
+                        if (user != null) {
+                            Lesson lesson = data.getParcelableExtra(LessonActivity.ARG_NAME_LESSON);
+
+                            LessonCompleted lessonCompleted = EverydayLanguageDbHelper
+                                    .getInstance(this)
+                                    .getLessonCompleted(lesson.ModuleId, user.Id, lesson.LessonOrder);
+                            ContentManager.pushLessonCompleted(this, user.Id, lesson.ModuleId, lesson.LessonOrder,
+                                    lessonCompleted.Correct, lessonCompleted.Errors, lessonCompleted.DateCompleted, this);
+
+                            if (lesson.ReviewStartOrder > 0) {
+                                ContentManager.downloadTotals(this, lesson.LessonOrder, lesson.ModuleId, this);
+                            } else {
+                                TotalsFragment totalsFragment = TotalsFragment.newInstance(0, 0);
+                                getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.main_content, totalsFragment)
+                                        .commitAllowingStateLoss();
+                            }
+                            //ContentManager.syncUser(this, user.Id, this);
+
+                           // intent = new Intent(this, TotalsActivity.class);
+                            //intent.putExtra(ARG_NAME_TOTAL, mLesson.ReviewStartOrder);
+                            //startActivityForResult(intent, TOTALS_REQUEST_CODE);
+                        }
                         break;
 
                     case LessonActivity.FINISH_TYPE_SWITCH_USER:
@@ -431,7 +489,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                         break;
 
                     case LessonActivity.FINISH_TYPE_START_OVER:
-                        ContentManager.syncUser(this, this, mCurrentUser.Id, 0, true, true);
+                       // ContentManager.syncUser(this, this, mCurrentUser.Id, 0, true, true);
 
                         /*
                         mLesson = EverydayLanguageDbHelper
@@ -455,7 +513,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                         EverydayLanguageDbHelper
                                 .getInstance(getApplicationContext())
                                 .clearLessons();
-                        ContentManager.syncUser(this, this, mCurrentUser.Id, 0, true, true);
+                        //ContentManager.syncUser(this, this, mCurrentUser.Id, 0, true, true);
 
                         /*
                         mWaitingForLessons = true;

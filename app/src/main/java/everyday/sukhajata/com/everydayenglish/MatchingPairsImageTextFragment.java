@@ -266,7 +266,7 @@ public class MatchingPairsImageTextFragment extends Fragment {
             mListener = (SlideCompletedListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnTotalsFragmentInteractionListener");
         }
     }
 
