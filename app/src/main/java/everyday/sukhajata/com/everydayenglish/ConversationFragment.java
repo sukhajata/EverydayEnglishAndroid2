@@ -1,6 +1,7 @@
 package everyday.sukhajata.com.everydayenglish;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -85,14 +86,16 @@ public class ConversationFragment extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         boolean left = true;
-        LinearLayout root = (LinearLayout)view.findViewById(R.id.conversation_root);
+        LinearLayout textContainer = (LinearLayout)view.findViewById(R.id.conversation_textContainer);
 
         for (final SlideMedia slideMedia : mSlide.MediaList) {
             LinearLayout linearLayout = new LinearLayout(getActivity());
             linearLayout.setLayoutParams(layoutParams);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
             TextView txt = new TextView(getActivity());
             txt.setLayoutParams(textViewLayoutParams);
+            txt.setPadding(5,5,5,5);
             txt.setText(slideMedia.English + "\n" + slideMedia.Thai);
             if (left) {
                 txt.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_corner1, null));
@@ -134,7 +137,7 @@ public class ConversationFragment extends Fragment {
                 linearLayout.addView(arrow);
                 linearLayout.addView(avatar);
             }
-            root.addView(linearLayout);
+            textContainer.addView(linearLayout);
 
             left = !left;
         }

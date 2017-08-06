@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -76,15 +77,19 @@ public class LessonActivity extends AppCompatActivity
 //        stars = new ArrayList<>();
 
         //check if user has already started this lesson
-        mCurrentSlide = EverydayLanguageDbHelper
+        int slideCompleted = EverydayLanguageDbHelper
                 .getInstance(this)
-                .getSlideCompleted(mUserId, mLesson.Id) - 1;
+                .getSlideCompleted(mUserId, mLesson.Id);
+
+        if (slideCompleted > 0) {
+            mCurrentSlide = slideCompleted - 1;
+        }
 
         if (mCurrentSlide >= mLesson.Pages.size()) {
             mCurrentSlide = 0;
         }
 
-        LinearLayout progressPanel = (LinearLayout) findViewById(R.id.lesson_progressBar);
+        LinearLayout progressPanel = (LinearLayout) findViewById(R.id.lesson_progressPanel);
         //show stars
         for (int i = 0; i < mCurrentSlide; i++) {
             ImageView imageView = new ImageView(this);
@@ -103,37 +108,16 @@ public class LessonActivity extends AppCompatActivity
                 .getInstance(this)
                 .checkClearSlideCompleted(mUserId, mModuleId, mLesson.Id, mLesson.LessonOrder);
 
-        //initialize text to speech
-        //check english-US tts loaded
-        //ContentManager.setupAudio(getApplicationContext(), this, this);
-
-        /*
-        for (Slide slide: mLesson.Pages) {
-            Log.d("SUKH", "lesson content slide: " + String.valueOf(slide.Id) + ", cat: " +
-                String.valueOf(slide.CatId));
-        }
-        */
-
-
-        //Log.d("LESSON", "Lesson " + String.valueOf(lesson.Id) + " received by lesson activity");
-
         moveNext();
 
     }
 
     private void moveNext() {
-        /*
-        if (mLesson.Id == 1) {
-            while (mLesson.Pages.get(mCurrentSlide).SlideOrder < 41) {
-                mCurrentSlide++;
-            }
-        }
-        */
+
         Slide slide = mLesson.Pages.get(mCurrentSlide);
         EverydayLanguageDbHelper dbHelper = EverydayLanguageDbHelper
                 .getInstance(getApplicationContext());
-        //get slide with all content
-        //Slide slide =
+
         String instructions = dbHelper.getSlideInstructions(slide.CatId);
         Log.d("SLIDE", "cat = " + String.valueOf(slide.CatId));
         mCurrentFragment = null;
@@ -185,9 +169,12 @@ public class LessonActivity extends AppCompatActivity
         mCurrentFragment.onAttach(this);
 
 
-        getSupportActionBar().setTitle(instructions);
+        //getSupportActionBar().setTitle(instructions);
+        TextView txtInstructions = (TextView)findViewById(R.id.lesson_instructions);
+        txtInstructions.setText(instructions);
 
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .replace(R.id.activity_lesson2, mCurrentFragment)
                 .commit();
 
@@ -256,7 +243,7 @@ public class LessonActivity extends AppCompatActivity
         if (errors > 1) {
             moveNext();
         } else {
-            LinearLayout progressPanel = (LinearLayout)findViewById(R.id.lesson_progressBar);
+            LinearLayout progressPanel = (LinearLayout)findViewById(R.id.lesson_progressPanel);
             ImageView star = (ImageView)progressPanel.getChildAt(mCurrentSlide);
             star.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_gold, null));
 
@@ -277,18 +264,7 @@ public class LessonActivity extends AppCompatActivity
             }
         }
 
-        /*
-        try {
-            //int currentItem = mPager.getCurrentItem();
-            //mPager.setCurrentItem(currentItem + 1);
-        } catch (Exception ex) {
-            EverydayLanguageDbHelper.getInstance(getApplicationContext())
-                    .updateLessonCompleted(mUserId, mLesson.Id);
 
-            setResult(RESULT_OK);
-            finish();
-        }
-        */
     }
 
     public void onAudioFinished(String key) {

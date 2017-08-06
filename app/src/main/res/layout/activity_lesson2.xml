@@ -9,14 +9,10 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/lesson_progressBar"
+        android:id="@+id/lesson_progressPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimaryDark">
-
-
-    </LinearLayout>
+        android:orientation="horizontal"/>
     <RelativeLayout
         android:id="@+id/lesson_instructionsPanel"
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -49,6 +50,9 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(myToolbar);
 
         ContentManager.setupAudio(getApplicationContext(), this, this);
 
@@ -458,61 +462,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
        if (requestCode == USER_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                String email = data.getStringExtra(SetupActivity.ARG_EMAIL);
-                String password = data.getStringExtra(SetupActivity.ARG_PASSWORD);
-                int result = EverydayLanguageDbHelper
-                        .getInstance(this)
-                        .checkUser(email, password);
 
-                if (result == EverydayLanguageDbHelper.USER_NOT_EXISTS) {
-                    /*
-                    ContentManager.getUserId(getApplicationContext(), email, password, this);
-                    */
-                } else if (result == EverydayLanguageDbHelper.USER_WRONG_PASSWORD) {
-                    int numUsers = EverydayLanguageDbHelper
-                            .getInstance(this)
-                            .getUserCount();
-                    Intent intent = new Intent(this, SetupActivity.class);
-                    intent.putExtra(SetupActivity.ARG_USER_COUNT, numUsers);
-                    intent.putExtra(SetupActivity.ARG_WRONG_PASSWORD, true);
-                    startActivityForResult(intent, USER_REQUEST_CODE);
 
-                } else if (result == EverydayLanguageDbHelper.USER_EXISTS_CORRECT_PASSWORD) {
-                    /*
-                    mCurrentUser = EverydayLanguageDbHelper
-                            .getInstance(this)
-                            .getUser(email);
-                    ContentManager.syncUser(this, this, mCurrentUser.Id, 0, false, true);
-                    */
-                    /*
-                    mLesson = EverydayLanguageDbHelper
-                            .getInstance(this)
-                            .getNextLesson(mCurrentUser.Id);
-
-                    if (mLesson != null) {
-                        mWaitingForLessons = false;
-                        if ( mLesson.Pages.size() > 0) {
-                            mWaitingForSlides = false;
-                            launchLesson(mLesson);
-                        } else {
-                            mWaitingForSlides = true;
-                        }
-                    } else {
-                        Log.d("SUKH", "Waiting for data...");
-                        mWaitingForLessons = true;
-                        mWaitingForSlides = true;
-                    }
-
-                    int lastOrder = EverydayLanguageDbHelper
-                            .getInstance(this)
-                            .getLastLessonOrder(mCurrentUser.Id);
-
-                    ContentManager.syncData(getApplicationContext(), this, imageUrl,
-                            mCurrentUser.Id, lastOrder);
-                            */
-                }
-            }
        } else if (requestCode == TOTALS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 //startLessonSync(true);

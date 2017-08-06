@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import everyday.sukhajata.com.everydayenglish.interfaces.DownloadCallback;
 import everyday.sukhajata.com.everydayenglish.interfaces.SlideCompletedListener;
@@ -90,7 +92,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        layout = (LinearLayout)inflater.inflate(
+        layout = (ScrollView)inflater.inflate(
                 R.layout.fragment_login, container, false);
 
         final EditText password = (EditText)layout.findViewById(R.id.login_password);
@@ -115,7 +117,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 3) {
+                if (s.length() > 2) {
                     btnSubmit.setEnabled(true);
                 }
             }
@@ -138,6 +140,8 @@ public class LoginFragment extends Fragment implements DownloadCallback {
                     if (user.Password != null && user.Password.length() > 1) {
                         if (p.equals(user.Password)) {
                             mListener.onLoginFragmentInteraction(user);
+                        } else {
+                            password.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorBorderWrong, null));
                         }
                     } else {
                         EverydayLanguageDbHelper
@@ -158,7 +162,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
 
     public void btnFind_click() {
         EditText txtClassCode = (EditText) layout.findViewById(R.id.login_classCode);
-        String classCode = txtClassCode.getText().toString();
+        String classCode = txtClassCode.getText().toString().toUpperCase();
         EditText txtStudentPosition = (EditText)layout.findViewById(R.id.login_studentPosition);
         int studentPosition = 0;
         try {

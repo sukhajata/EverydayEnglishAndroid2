@@ -71,7 +71,9 @@ public class LessonFragment extends Fragment {
                                         .getInstance(getActivity())
                                         .getLessonsByModule(mModuleId);
             RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            layoutManager.setStackFromEnd(true);
+            recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(new MyLessonRecyclerViewAdapter(getActivity(), mUserId, mModuleId, lessons, mListener));
         }
         return view;
