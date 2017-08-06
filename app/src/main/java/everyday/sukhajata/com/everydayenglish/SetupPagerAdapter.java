@@ -36,7 +36,7 @@ public class SetupPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-            return LoginFragment.newInstance(mWrongPassword);
+            return LoginFragment.newInstance();
     }
 
 }

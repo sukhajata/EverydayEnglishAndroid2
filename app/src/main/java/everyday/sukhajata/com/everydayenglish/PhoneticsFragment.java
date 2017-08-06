@@ -79,8 +79,8 @@ public class PhoneticsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ContentManager.playAudio(
-                        slideMedia.English,
-                        slideMedia.AudioFileName);
+                        getActivity(),
+                        slideMedia.English);
             }
         });
 
@@ -88,12 +88,12 @@ public class PhoneticsFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(slideMedia.English, slideMedia.AudioFileName);
+                ContentManager.playAudio(getActivity(), slideMedia.English);
             }
         });
 
         //load audio files
-        ContentManager.loadAudioFiles(getActivity(), mSlide.MediaList.get(0).PhoneticList);
+       // ContentManager.loadAudioFiles(getActivity(), mSlide.MediaList.get(0).PhoneticList);
 
         LinearLayout wordLayout = (LinearLayout) layout.findViewById(R.id.phonetics_layoutWord);
 
@@ -152,10 +152,7 @@ public class PhoneticsFragment extends Fragment {
     }
 
     private void btnPhoneticClick(FrameLayout frame, Phonetic phonetic) {
-        ContentManager.playAudio(
-                getActivity(),
-                phonetic.Id,
-                (AudioFinishedCallback)getActivity());
+
 
         if (phonetic.Notes.length() > 0) {
             txtNotes.setText(phonetic.Notes);

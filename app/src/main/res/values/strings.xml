@@ -7,6 +7,7 @@
     <string name="next">ต่อไป</string>
     <string name="login">ล็อกอินหรือลงทะเบียน</string>
     <string name="action_settings">Settings</string>
+    <string name="show_class">ชั้น</string>
     <string name="change_user">เปลี่ยนบัญชี</string>
     <string name="login_submit">สืบสาน</string>
     <string name="connect_to_network">ช่วยเชื่อมต่อกับอินเทอร์เน็ตแล้วแตะต่อ</string>
@@ -18,9 +19,12 @@
     <string name="wrong_password">รหัสผ่านไม่ถูกต้อง</string>
     <string name="downloading_lessons">ดาวน์โหลดบทเรียน</string>
     <string name="dont_know">ไม่ทราบ</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="childAt">เด็กที่</string>
+    <string name="classCode">รหัสชั้น</string>
+    <string name="find">หา</string>
+    <string name="firstName">ชื่อ</string>
+    <string name="lastName">นามสกุล</string>
+    <string name="login2">ล็อคอิน</string>
     <string name="title_activity_lesson">LessonActivity</string>
     <string name="title_activity_setup">SetupActivity</string>
 </resources>

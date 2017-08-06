@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="everyday.sukhajata.com.everydayenglish.LessonActivity">
     <item
-        android:id="@+id/action_switchUser"
-        android:orderInCategory="1"
-        android:title="@string/change_user"
-        app:showAsAction="never"/>
-    <item
         android:id="@+id/action_refresh_lessons"
         android:orderInCategory="2"
         android:title="Refresh lessons"

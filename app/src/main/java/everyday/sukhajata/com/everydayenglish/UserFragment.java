@@ -58,7 +58,7 @@ public class UserFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mEmails = EverydayLanguageDbHelper.getInstance(getActivity()).getUsers();
+        //mEmails = EverydayLanguageDbHelper.getInstance(getActivity()).getUsers();
         /*
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);

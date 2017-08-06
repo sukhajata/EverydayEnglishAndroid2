@@ -3,8 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="everyday.sukhajata.com.everydayenglish.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_class"
+        android:orderInCategory="1"
+        android:title="@string/show_class"
+        android:icon="@drawable/ic_school_black_24dp"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_switchUser"
+        android:orderInCategory="2"
+        android:title="@string/change_user"
+        android:icon="@drawable/ic_person_add_black_24dp"
+        app:showAsAction="always"/>
 </menu>
