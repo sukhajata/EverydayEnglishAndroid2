@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
@@ -124,7 +125,7 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
             }
         });
 
-        if (mSlide.ImageFileName != null) {
+        if (mSlide.ImageFileName != null && mSlide.ImageFileName.length() > 1) {
             ImageView img = (ImageView)layout.findViewById(R.id.translate_image);
             ContentManager.fetchImage(getActivity(), img,
                     mSlide.ImageFileName, mImageUrl);
@@ -141,17 +142,14 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
         for (SlideMedia slideMedia : mSlide.MediaList) {
             FrameLayout frame = new FrameLayout(getActivity());
             frame.setPadding(7,7,7,7);
-            ViewGroup.LayoutParams frameLayoutParams = frame.getLayoutParams();
-            frameLayoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            frameLayoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            ViewGroup.LayoutParams frameLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             frame.setLayoutParams(frameLayoutParams);
 
             Button btn = new Button(getActivity(), null, R.style.SelectableButton);
-            ViewGroup.LayoutParams buttonLayoutParams = btn.getLayoutParams();
-            buttonLayoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            buttonLayoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            ViewGroup.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             btn.setLayoutParams(buttonLayoutParams);
-
             SlideMedia word = mSlide.MediaList.get(i);
             setupButton(frame, btn, word);
 
@@ -181,7 +179,11 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
 
     private void setupButton(final FrameLayout frame, Button button,
                                  final SlideMedia word) {
-        button.setText(word.English);
+        button.setPadding(14,14,14,14);
+        button.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null));
+        button.setText(word.English.toLowerCase());
+        button.setTextSize(20);
+        button.setTextColor(ResourcesCompat.getColor(getResources(),R.color.colorLabelBackground, null));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

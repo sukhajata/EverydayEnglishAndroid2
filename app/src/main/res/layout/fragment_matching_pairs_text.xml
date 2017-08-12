@@ -30,24 +30,24 @@
 
 
     <FrameLayout
-        android:id="@+id/matchingPairsText_frame6"
+        android:id="@+id/matchingPairsText_frame3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/button_border">
         <Button
-            android:id="@+id/matchingPairsText_buttonText6"
+            android:id="@+id/matchingPairsText_buttonThai1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/SelectableButton" />
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/matchingPairsText_frame7"
+        android:id="@+id/matchingPairsText_frame4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/button_border"
         android:layout_marginBottom="@dimen/spacer">
         <Button
-            android:id="@+id/matchingPairsText_buttonText7"
+            android:id="@+id/matchingPairsText_buttonThai2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/SelectableButton" />

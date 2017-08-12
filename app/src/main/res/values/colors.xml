@@ -12,4 +12,5 @@
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="colorLightGrey">#F5F5F5</color>
     <color name="colorLightYellow">#FFF9C4</color>
+    <color name="colorGrey">#BDBDBD</color>
 </resources>

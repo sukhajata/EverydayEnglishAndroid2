@@ -34,9 +34,12 @@
         android:id="@+id/translate_flexbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:alignItems="flex_start"
+        app:alignContent="flex_start">
+    </com.google.android.flexbox.FlexboxLayout>
 
-</com.google.android.flexbox.FlexboxLayout>
     <ImageView
         android:id="@+id/translate_image"
         android:layout_width="wrap_content"

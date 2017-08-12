@@ -8,6 +8,7 @@
     <string name="login">ล็อกอินหรือลงทะเบียน</string>
     <string name="action_settings">Settings</string>
     <string name="show_class">ชั้น</string>
+    <string name="refresh">รีเฟรช</string>
     <string name="change_user">เปลี่ยนบัญชี</string>
     <string name="login_submit">สืบสาน</string>
     <string name="connect_to_network">ช่วยเชื่อมต่อกับอินเทอร์เน็ตแล้วแตะต่อ</string>

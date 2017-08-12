@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/button_padding"
-        android:textSize="20dp"
-        android:background="@color/colorLightYellow"
+        android:textSize="16dp"
+        android:background="@color/colorGrey"
         android:textAppearance="?attr/textAppearanceListItem" />
 </LinearLayout>

@@ -3,6 +3,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="button_border">7dp</dimen>
+    <dimen name="frame_border">5dp</dimen>
     <dimen name="image_border">3dp</dimen>
     <dimen name="button_padding">5dp</dimen>
     <dimen name="label_padding">5dp</dimen>

@@ -82,6 +82,7 @@ public class ListeningFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_listening, container, false);
+        mLayout = view;
 
         ImageView speaker = (ImageView)view.findViewById(R.id.listening_speaker);
         speaker.setOnClickListener(new View.OnClickListener() {

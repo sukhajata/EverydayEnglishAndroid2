@@ -63,8 +63,8 @@ public class MyLessonRecyclerViewAdapter extends RecyclerView.Adapter<MyLessonRe
                 .getLessonCompleted(mUserId, mModuleId, holder.mItem.LessonOrder);
 
         if (lessonCompleted != null) {
-            holder.mCorrectView.setText(lessonCompleted.Correct);
-            holder.mErrorsView.setText(lessonCompleted.Errors);
+            holder.mCorrectView.setText(String.valueOf(lessonCompleted.Correct));
+            holder.mErrorsView.setText(String.valueOf(lessonCompleted.Errors));
             holder.mDateCompletedView.setText(lessonCompleted.DateCompleted);
 
             //set duller background colors

@@ -31,7 +31,10 @@
         android:layout_below="@id/bingo_txtTarget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:flexWrap="wrap">
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:alignItems="flex_start"
+        app:alignContent="flex_start">
         <FrameLayout
             android:id="@+id/bingo_frame1"
             android:layout_height="wrap_content"

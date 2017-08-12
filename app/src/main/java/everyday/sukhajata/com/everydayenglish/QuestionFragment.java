@@ -106,7 +106,7 @@ public class QuestionFragment extends Fragment {
         });
 
         ImageView img = (ImageView)view.findViewById(R.id.question_image);;
-        if (mPage.ImageFileName.length() > 0) {
+        if (mPage.ImageFileName != null && mPage.ImageFileName.length() > 1) {
             ContentManager.fetchImage(getActivity(), img, mPage.ImageFileName,
                     mImageUrl);
         }

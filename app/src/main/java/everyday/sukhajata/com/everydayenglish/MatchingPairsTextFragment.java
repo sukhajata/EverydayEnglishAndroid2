@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +82,7 @@ public class MatchingPairsTextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        PercentRelativeLayout layout = (PercentRelativeLayout) inflater.inflate(R.layout.fragment_matching_pairs_text, container, false);
+        View layout =  inflater.inflate(R.layout.fragment_matching_pairs_text, container, false);
         mLayout = layout;
 
 
@@ -141,10 +142,13 @@ public class MatchingPairsTextFragment extends Fragment {
 
         mSelectedEnglishFrame = frame;
         mSelectedEnglishPhrase = (SlideMedia)button.getTag();
-        ContentManager.fetchImage(getActivity(), mImageView,
-                mSelectedEnglishPhrase.ImageFileName, mImageUrl);
-        mImageView.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(),
-                R.color.colorLabelBackground, null));
+
+        if (mSelectedEnglishPhrase.ImageFileName != null && mSelectedEnglishPhrase.ImageFileName.length() > 1) {
+            ContentManager.fetchImage(getActivity(), mImageView,
+                    mSelectedEnglishPhrase.ImageFileName, mImageUrl);
+            mImageView.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(),
+                    R.color.colorLabelBackground, null));
+        }
         ContentManager.playAudio(getActivity(), mSelectedEnglishPhrase.English);
         mSelectedEnglishFrame.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(), R.color.colorBorderSelected, null));
 
@@ -154,7 +158,7 @@ public class MatchingPairsTextFragment extends Fragment {
                 //match. remove both
                 removeFrames(mSelectedEnglishFrame, mSelectedThaiFrame);
                 correctCount++;
-                if (correctCount == 4) {
+                if (correctCount == 2) {
                     mListener.onSlideCompleted(mPage.Id, errorCount);
                 }
             } else {
@@ -188,7 +192,7 @@ public class MatchingPairsTextFragment extends Fragment {
                 //yes. remove both
                 removeFrames(mSelectedEnglishFrame, mSelectedThaiFrame);
                 correctCount++;
-                if (correctCount == 4) {
+                if (correctCount == 2) {
                     mListener.onSlideCompleted(mPage.Id, errorCount);
                 }
             } else {

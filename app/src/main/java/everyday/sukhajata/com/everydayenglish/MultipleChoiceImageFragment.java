@@ -88,8 +88,7 @@ public class MultipleChoiceImageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        PercentRelativeLayout layout =
-                (PercentRelativeLayout)inflater.inflate(R.layout.fragment_multiple_choice_image, container, false);
+        View layout = inflater.inflate(R.layout.fragment_multiple_choice_image, container, false);
 
 
         TextView txtTarget = (TextView)layout.findViewById(R.id.multipleChoiceImage_textTarget);

@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ public class LessonActivity extends AppCompatActivity
     public static final int FINISH_TYPE_SWITCH_USER = 2;
     public static final int FINISH_TYPE_REFRESH_LESSONS = 3;
     public static final int FINISH_TYPE_START_OVER = 4;
+    public static final int FINISH_TYPE_CANCEL = 5;
     public static final int CHECK_DATA_CODE = 10;
 
 
@@ -94,14 +97,38 @@ public class LessonActivity extends AppCompatActivity
         for (int i = 0; i < mCurrentSlide; i++) {
             ImageView imageView = new ImageView(this);
             imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_gold, null));
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0,0);
+            layoutParams.weight = 1;
+            imageView.setLayoutParams(layoutParams);
+
             progressPanel.addView(imageView);
         }
 
         for (int i = mCurrentSlide; i < mLesson.Pages.size(); i++) {
             ImageView imageView = new ImageView(this);
             imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_white, null));
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0,0);
+            layoutParams.weight = 1;
+            imageView.setLayoutParams(layoutParams);
+
             progressPanel.addView(imageView);
         }
+
+        //home button
+        ImageView home = (ImageView)findViewById(R.id.lesson_home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra(ARG_NAME_FINISH_TYPE, FINISH_TYPE_CANCEL);
+                intent.putExtra(ARG_NAME_LESSON, mLesson);
+                setResult(Activity.RESULT_OK, intent);
+
+                finish();
+            }
+        });
 
         //if this lesson has already been completed, remove values from slideCompleted table
         EverydayLanguageDbHelper

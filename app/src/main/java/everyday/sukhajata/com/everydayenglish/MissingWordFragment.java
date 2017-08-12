@@ -96,7 +96,7 @@ public class MissingWordFragment extends Fragment {
         */
 
 
-        if (mSlide.ImageFileName != null) {
+        if (mSlide.ImageFileName != null && mSlide.ImageFileName.length() > 1) {
             ImageView img = (ImageView)layout.findViewById(R.id.missingWord_image);
             ContentManager.fetchImage(getActivity(), img, mSlide.ImageFileName,
                     mImageUrl);

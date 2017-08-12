@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import everyday.sukhajata.com.everydayenglish.interfaces.SlideCompletedListener;
@@ -73,29 +74,154 @@ public class ConversationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_conversation, container, false);
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0, 20, 0 , 0);
+        if (mSlide.ImageFileName != null && mSlide.ImageFileName.length() > 0) {
+            ImageView imageView = (ImageView)view.findViewById(R.id.conversation_image);
+            ContentManager.fetchImage(getActivity(), imageView, mSlide.ImageFileName, mImageUrl);
+        }
 
-        LinearLayout.LayoutParams textViewLayoutParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        textViewLayoutParams.setMargins(0,10,0,0);
+        LinearLayout textContainer = (LinearLayout)view.findViewById(R.id.conversation_textContainer);
+
+        String speech1 = mSlide.MediaList.get(0).English + "\n" + mSlide.MediaList.get(0).Thai;
+        TextView txt = (TextView)view.findViewById(R.id.conversation_text1);
+        txt.setText(speech1);
+        txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ContentManager.playAudio(getActivity(), mSlide.MediaList.get(0).English);
+            }
+        });
+
+        String speech2 = mSlide.MediaList.get(1).English + "\n" + mSlide.MediaList.get(1).Thai;
+        TextView txt2 = (TextView)view.findViewById(R.id.conversation_text2);
+        txt2.setText(speech2);
+        txt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ContentManager.playAudio(getActivity(), mSlide.MediaList.get(1).English);
+            }
+        });
+
+        String speech3 = mSlide.MediaList.get(2).English + "\n" + mSlide.MediaList.get(2).Thai;
+        TextView txt3 = (TextView)view.findViewById(R.id.conversation_text3);
+        txt3.setText(speech3);
+        txt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ContentManager.playAudio(getActivity(), mSlide.MediaList.get(2).English);
+            }
+        });
 
 
-        LinearLayout.LayoutParams avatarParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        if (mSlide.MediaList.size() > 3) {
+            String speech4 = mSlide.MediaList.get(3).English + "\n" + mSlide.MediaList.get(3).Thai;
+            TextView txt4 = (TextView)view.findViewById(R.id.conversation_text4);
+            txt4.setText(speech4);
+            txt4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(3).English);
+                }
+            });
 
+        } else {
+            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech4);
+            textContainer.removeView(relativeLayout);
+        }
+
+        if (mSlide.MediaList.size() > 4) {
+            String speech5 = mSlide.MediaList.get(4).English + "\n" + mSlide.MediaList.get(4).Thai;
+            TextView txt5 = (TextView)view.findViewById(R.id.conversation_text5);
+            txt5.setText(speech5);
+            txt5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(4).English);
+                }
+            });
+
+        } else {
+            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech5);
+            textContainer.removeView(relativeLayout);
+        }
+
+        if (mSlide.MediaList.size() > 5) {
+            String speech6 = mSlide.MediaList.get(5).English + "\n" + mSlide.MediaList.get(5).Thai;
+            TextView txt6 = (TextView)view.findViewById(R.id.conversation_text6);
+            txt6.setText(speech6);
+            txt6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(5).English);
+                }
+            });
+
+        } else {
+            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech6);
+            textContainer.removeView(relativeLayout);
+        }
+
+        if (mSlide.MediaList.size() > 6) {
+            String speech7 = mSlide.MediaList.get(6).English + "\n" + mSlide.MediaList.get(6).Thai;
+            TextView txt7 = (TextView)view.findViewById(R.id.conversation_text7);
+            txt7.setText(speech7);
+            txt7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(6).English);
+                }
+            });
+
+        } else {
+            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech7);
+            textContainer.removeView(relativeLayout);
+        }
+
+        if (mSlide.MediaList.size() > 7) {
+            String speech8 = mSlide.MediaList.get(7).English + "\n" + mSlide.MediaList.get(7).Thai;
+            TextView txt8 = (TextView)view.findViewById(R.id.conversation_text8);
+            txt8.setText(speech8);
+            txt8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(7).English);
+                }
+            });
+
+        } else {
+            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech8);
+            textContainer.removeView(relativeLayout);
+        }
+
+
+        Button btnNext = (Button)view.findViewById(R.id.conversation_btnNext);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSlideCompleted(mSlide.Id, 0);
+            }
+        });
+
+
+        /*
         boolean left = true;
         LinearLayout textContainer = (LinearLayout)view.findViewById(R.id.conversation_textContainer);
 
         for (final SlideMedia slideMedia : mSlide.MediaList) {
-            LinearLayout linearLayout = new LinearLayout(getActivity());
-            linearLayout.setLayoutParams(layoutParams);
-            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            RelativeLayout.LayoutParams relativeLayoutParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            relativeLayoutParams.setMargins(0, 20, 0 , 0);
 
+            RelativeLayout relativeLayout = new RelativeLayout(getActivity());
+            relativeLayout.setLayoutParams(relativeLayoutParams);
+            //relativeLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+            //text
+            RelativeLayout.LayoutParams textViewLayoutParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            textViewLayoutParams.setMargins(0,10,0,0);
             TextView txt = new TextView(getActivity());
-            txt.setLayoutParams(textViewLayoutParams);
-            txt.setPadding(5,5,5,5);
+
+            txt.setPadding(10,10,10,10);
             txt.setText(slideMedia.English + "\n" + slideMedia.Thai);
             if (left) {
                 txt.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.rounded_corner1, null));
@@ -109,19 +235,23 @@ public class ConversationFragment extends Fragment {
                 }
             });
 
-            LinearLayout.LayoutParams arrowParams = new LinearLayout.LayoutParams(30, 30);
+            //arrow
+            RelativeLayout.LayoutParams arrowParams = new RelativeLayout.LayoutParams(30,30);
             ImageView arrow = new ImageView(getActivity());
             if (left) {
                 arrow.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.arrow_bg2, null));
-                arrowParams.setMargins(0,6,15-30,0);
+                arrowParams.setMargins(0,10,10-20,0);
             } else {
-                arrowParams.setMargins(15-30,6,0,0);
+                arrowParams.setMargins(10-20,10,0,0);
                 arrow.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.arrow_bg1, null));
             }
-            arrow.setLayoutParams(arrowParams);
 
+
+            //avatar
+            RelativeLayout.LayoutParams avatarParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             ImageView avatar = new ImageView(getActivity());
-            avatar.setLayoutParams(avatarParams);
+
             if (left) {
                 avatar.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.mipmap.ic_giraffe, null));
             } else {
@@ -129,26 +259,36 @@ public class ConversationFragment extends Fragment {
             }
 
             if (left){
-                linearLayout.addView(avatar);
-                linearLayout.addView(arrow);
-                linearLayout.addView(txt);
+                arrowParams.addRule(RelativeLayout.RIGHT_OF, avatar.getId());
+                textViewLayoutParams.addRule(RelativeLayout.RIGHT_OF, arrow.getId());
+
+                avatar.setLayoutParams(avatarParams);
+                arrow.setLayoutParams(arrowParams);
+                txt.setLayoutParams(textViewLayoutParams);
+
+                relativeLayout.addView(avatar);
+                relativeLayout.addView(arrow);
+                relativeLayout.addView(txt);
+
             } else {
-                linearLayout.addView(txt);
-                linearLayout.addView(arrow);
-                linearLayout.addView(avatar);
+                arrowParams.addRule(RelativeLayout.LEFT_OF, txt.getId());
+                avatarParams.addRule(RelativeLayout.LEFT_OF, arrow.getId());
+
+                avatar.setLayoutParams(avatarParams);
+                arrow.setLayoutParams(arrowParams);
+                txt.setLayoutParams(textViewLayoutParams);
+
+                relativeLayout.addView(txt);
+                relativeLayout.addView(arrow);
+                relativeLayout.addView(avatar);
+
             }
-            textContainer.addView(linearLayout);
+            textContainer.addView(relativeLayout);
 
             left = !left;
         }
+        */
 
-        Button btnNext = (Button)view.findViewById(R.id.conversation_btnNext);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onSlideCompleted(mSlide.Id, 0);
-            }
-        });
 
         return view;
     }
