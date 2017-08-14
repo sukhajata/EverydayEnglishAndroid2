@@ -19,4 +19,11 @@
         android:title="@string/change_user"
         android:icon="@drawable/ic_person_add_black_24dp"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_home"
+        android:orderInCategory="4"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="always"
+        />
 </menu>

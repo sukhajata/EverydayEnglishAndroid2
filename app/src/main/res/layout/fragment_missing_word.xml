@@ -8,6 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/missingWord_textContentThai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/LabelTargetThai"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,16 +26,12 @@
             <TextView
                 android:id="@+id/missingWord_textContent"
                 android:layout_toRightOf="@id/missingWord_speaker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/LabelTarget"/>
         </RelativeLayout>
-    <TextView
-        android:id="@+id/missingWord_textContentThai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/LabelTargetThai"/>
+
 
     <FrameLayout
         android:id="@+id/missingWord_frame1"

@@ -75,6 +75,7 @@ public class MissingWordWritingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_missing_word_writing, container, false);
 
+        ((TextView)view.findViewById(R.id.missingWordWriting_txtThai)).setText(mSlide.ContentThai);
         ((TextView)view.findViewById(R.id.missingWordWriting_txtTarget)).setText(mSlide.Content);
 
         EditText edit = ((EditText)view.findViewById(R.id.missingWordWriting_txtWriting));

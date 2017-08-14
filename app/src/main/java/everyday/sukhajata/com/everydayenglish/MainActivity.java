@@ -27,7 +27,7 @@ import everyday.sukhajata.com.everydayenglish.utility.EverydayLanguageDbHelper;
 
 public class    MainActivity extends AppCompatActivity implements DownloadCallback,
         AudioSetupCallback, AudioFinishedCallback, NextLessonListener, LessonFragment.OnLessonFragmentInteractionListener,
-        LoginFragment.LoginFragmentInteractionListener{
+        LoginFragment.LoginFragmentInteractionListener, TotalsFragment.OnTotalsFragmentInteractionListener, ClassListFragment.ClassListFragmentInteractionListener{
 
     public String imageUrl;
     public static final int USER_REQUEST_CODE = 1;
@@ -54,6 +54,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(myToolbar);
 
+        showProgressDialog();
+        mAudioSetupComplete = false;
         ContentManager.setupAudio(getApplicationContext(), this, this);
 
         //calculate the size of images for this device and set url for image download
@@ -61,15 +63,11 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         imageUrl = ContentManager.getImageUrl(metrics);
 
-
-        //select the user. If there are no users launch setup
+        //get the last user that logged in. If there are no users launch setup
         EverydayLanguageDbHelper dbHelper = EverydayLanguageDbHelper.getInstance(getApplicationContext());
-        //dbHelper.dump();
-        //int numUsers = dbHelper.getUserCount();
         User user = dbHelper.getActiveUser();
         if (user != null) {
            syncUser(user);
-
         } else  {
             //select user or create new
             LoginFragment loginFragment = LoginFragment.newInstance();
@@ -86,40 +84,32 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         }
 
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
     }
 
     private void showProgressDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+        }
     }
 
     private void hideProgressDialog() {
         if (progressDialog != null) {
             progressDialog.dismiss();
+            progressDialog = null;
         }
     }
 
     private void syncUser(User user) {
-        showProgressDialog();
 
         boolean nextLessonCached = EverydayLanguageDbHelper
                 .getInstance(this)
                 .checkForLesson(user.LessonCompletedOrder + 1, user.ModuleId);
 
         if (!nextLessonCached) {
+            showProgressDialog();
             int lastLessonId = EverydayLanguageDbHelper
                     .getInstance(this)
                     .getLastLessonId();
@@ -130,10 +120,18 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             ContentManager.downloadSlides(this, lastLessonId, this);
         }
 
+        LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_content, lessonFragment)
+                .commitAllowingStateLoss();
+
+        /*
         boolean upToDate = EverydayLanguageDbHelper
                 .getInstance(this)
                 .lessonsCompletedUpToDate(user);
         if (!upToDate) {
+            showProgressDialog();
             mWaitingForLessonsCompleted = true;
             ContentManager.pullLessonsCompleted(this, user.Id, user.ModuleId, 0, this);
         } else {
@@ -143,6 +141,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                     .replace(R.id.main_content, lessonFragment)
                     .commitAllowingStateLoss();
         }
+        */
 
     }
 
@@ -205,11 +204,10 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
         }else if (id == R.id.action_class) {
 
-
             if (user != null) {
+                showProgressDialog();
                 ContentManager.getClass(this, user.ClassId, this);
             }
-
 
             return true;
         } else if (id == R.id.action_switchUser) {
@@ -219,6 +217,15 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                     .beginTransaction()
                     .replace(R.id.main_content, loginFragment)
                     .commitAllowingStateLoss();
+        } else if (id == R.id.action_home) {
+
+            if (user != null) {
+                LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_content, lessonFragment)
+                        .commitAllowingStateLoss();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -333,6 +340,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     public void onDownloadResult(String code, String type, Object result) {
         if (code == DownloadCallback.RESPONSE_OK) {
             if (type == DownloadCallback.TYPE_CLASS) {
+                hideProgressDialog();
+
                 ArrayList<User> users = (ArrayList<User>)result;
                 ClassListFragment classListFragment = ClassListFragment.newInstance(users);
 
@@ -372,13 +381,29 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                 } else if (type.equals(DownloadCallback.TYPE_TOTALS)) {
                     int wordTotal = Integer.valueOf(args[0]);
                     double percentage = Double.valueOf(args[1]);
+                    int lessonOrder = Integer.valueOf(args[2]);
 
-                    TotalsFragment totalsFragment = TotalsFragment.newInstance(wordTotal, percentage);
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_content, totalsFragment)
-                            .commitAllowingStateLoss();
+                    hideProgressDialog();
 
+                    User user = EverydayLanguageDbHelper
+                            .getInstance(this)
+                            .getActiveUser();
+
+                    if (user != null) {
+                        LessonCompleted lessonCompleted = EverydayLanguageDbHelper
+                                .getInstance(this)
+                                .getLessonCompleted(user.Id, user.ModuleId, lessonOrder);
+
+                        TotalsFragment totalsFragment = TotalsFragment.newInstance(
+                                lessonCompleted.Correct,
+                                lessonCompleted.Errors,
+                                wordTotal,
+                                percentage);
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_content, totalsFragment)
+                                .commitAllowingStateLoss();
+                    }
                 } else if (type.equals(DownloadCallback.TYPE_USER)) {
                     try {
 
@@ -449,6 +474,9 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
         } else {
             mAudioSetupComplete = true;
+            if (!mWaitingForLessons && !mWaitingForSlides && !mWaitingForLessonsCompleted) {
+                hideProgressDialog();
+            }
         }
     }
 
@@ -538,14 +566,19 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
                             LessonCompleted lessonCompleted = EverydayLanguageDbHelper
                                     .getInstance(this)
-                                    .getLessonCompleted(lesson.ModuleId, user.Id, lesson.LessonOrder);
+                                    .getLessonCompleted(user.Id, lesson.ModuleId, lesson.LessonOrder);
                             ContentManager.pushLessonCompleted(this, user.Id, lesson.ModuleId, lesson.LessonOrder,
                                     lessonCompleted.Correct, lessonCompleted.Errors, lessonCompleted.DateCompleted, this);
 
                             if (lesson.ReviewStartOrder > 0) {
+                                showProgressDialog();
                                 ContentManager.downloadTotals(this, lesson.LessonOrder, lesson.ModuleId, this);
                             } else {
-                                TotalsFragment totalsFragment = TotalsFragment.newInstance(0, 0);
+                                TotalsFragment totalsFragment = TotalsFragment.newInstance(
+                                        lessonCompleted.Correct,
+                                        lessonCompleted.Errors,
+                                        0,
+                                        0);
                                 getSupportFragmentManager()
                                         .beginTransaction()
                                         .replace(R.id.main_content, totalsFragment)
@@ -663,6 +696,34 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                 .getLesson(item.Id);
 
         launchLesson(lesson);
+    }
+
+    public void onFragmentInteraction() {
+        User user = EverydayLanguageDbHelper
+                .getInstance(this)
+                .getActiveUser();
+
+        if (user != null) {
+            LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_content, lessonFragment)
+                    .commitAllowingStateLoss();
+        }
+    }
+
+    public void onClassListFragmentInteraction(){
+        User user = EverydayLanguageDbHelper
+                .getInstance(this)
+                .getActiveUser();
+
+        if (user != null) {
+            LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_content, lessonFragment)
+                    .commitAllowingStateLoss();
+        }
     }
 
 }

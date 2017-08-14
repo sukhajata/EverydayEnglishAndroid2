@@ -181,7 +181,7 @@ public class MatchingPairsImageFragment extends Fragment implements AudioFinishe
                 //yes, remove both
                 removeFrames(mSelectedTextFrame, mSelectedImageFrame);
                 correctCount++;
-                if (correctCount == 4) {
+                if (correctCount == 2) {
 
                         mListener.onSlideCompleted(mPage.Id, errorCount);
                 }
@@ -226,7 +226,7 @@ public class MatchingPairsImageFragment extends Fragment implements AudioFinishe
                 //yes, remove both
                 removeFrames(mSelectedTextFrame, mSelectedImageFrame);
                 correctCount++;
-                if (correctCount == 4) {
+                if (correctCount == 2) {
 
                         mListener.onSlideCompleted(mPage.Id, errorCount);
                 }

@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -100,6 +103,27 @@ public class BingoFragment extends Fragment {
         });
 
 
+        FlexboxLayout flexboxLayout = (FlexboxLayout) layout.findViewById(R.id.bingo_flexbox);
+
+        for (SlideMedia slideMedia : mSlide.MediaList) {
+            FrameLayout frame = new FrameLayout(getActivity());
+            frame.setPadding(7,7,7,7);
+            ViewGroup.LayoutParams frameLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            frame.setLayoutParams(frameLayoutParams);
+
+            Button btn = new Button(getActivity(), null, R.style.SelectableButton);
+            ViewGroup.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            btn.setLayoutParams(buttonLayoutParams);
+            setupButton(frame, btn, slideMedia);
+
+            frame.addView(btn);
+            flexboxLayout.addView(frame);
+        }
+
+
+/*
         FrameLayout frame1 = (FrameLayout)layout.findViewById(R.id.bingo_frame1);
         Button btn1 = (Button)layout.findViewById(R.id.bingo_button1);
         SlideMedia word = mSlide.MediaList.get(0);
@@ -146,7 +170,7 @@ public class BingoFragment extends Fragment {
         SlideMedia word9 = mSlide.MediaList.get(8);
         setupButton(frame9, btn9, word9);
 
-        /*
+
         FrameLayout frame10 = (FrameLayout)layout.findViewById(R.id.bingo_frame10);
         Button btn10 = (Button)layout.findViewById(R.id.bingo_button10);
         SlideMedia word10 = mSlide.MediaList.get(9);
@@ -166,18 +190,27 @@ public class BingoFragment extends Fragment {
         return layout;
     }
 
-    private void setupButton(final FrameLayout frame, final Button btn,
+    private void setupButton(final FrameLayout frame, final Button button,
                              final SlideMedia word) {
-        btn.setText(word.English);
-        btn.setOnClickListener(new View.OnClickListener() {
+        button.setPadding(14,14,14,14);
+        button.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null));
+        if (word.English.toLowerCase().equals("i")) {
+            button.setText(word.English);
+        } else {
+            button.setText(word.English.toLowerCase());
+        }
+        button.setTextSize(20);
+        button.setTextColor(ResourcesCompat.getColor(getResources(),R.color.colorLabelBackground, null));
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onButtonClick(frame, btn, word);
+                onButtonClick(frame, word);
             }
         });
     }
 
-    private void onButtonClick(FrameLayout frame, Button btn, SlideMedia word) {
+
+    private void onButtonClick(FrameLayout frame, SlideMedia word) {
         if (selectedFrame != null) {
             selectedFrame.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null));
         }

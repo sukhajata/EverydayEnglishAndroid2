@@ -98,7 +98,8 @@ public class LessonActivity extends AppCompatActivity
             ImageView imageView = new ImageView(this);
             imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_gold, null));
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0,0);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.weight = 1;
             imageView.setLayoutParams(layoutParams);
 
@@ -109,7 +110,8 @@ public class LessonActivity extends AppCompatActivity
             ImageView imageView = new ImageView(this);
             imageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_star_white, null));
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0,0);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.weight = 1;
             imageView.setLayoutParams(layoutParams);
 
@@ -190,6 +192,9 @@ public class LessonActivity extends AppCompatActivity
                 break;
             case 18:
                 mCurrentFragment = ListeningFragment.newInstance(slide, mImageUrl);
+                break;
+            case 20:
+                mCurrentFragment = MissingWordWritingFragment.newInstance(slide, mImageUrl);
                 break;
         }
 

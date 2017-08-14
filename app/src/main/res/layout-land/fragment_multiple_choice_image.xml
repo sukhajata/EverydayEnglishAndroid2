@@ -38,37 +38,34 @@
             android:id="@+id/multipleChoiceImage_frame1"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <ImageView
                 android:id="@+id/multipleChoiceImage_imageView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:padding="@dimen/button_border" />
+                android:adjustViewBounds="true" />
         </FrameLayout>
         <FrameLayout
             android:id="@+id/multipleChoiceImage_frame2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <ImageView
                 android:id="@+id/multipleChoiceImage_imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:padding="@dimen/button_border" />
+                android:adjustViewBounds="true" />
         </FrameLayout>
         <FrameLayout
             android:id="@+id/multipleChoiceImage_frame3"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <ImageView
                 android:id="@+id/multipleChoiceImage_imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:padding="@dimen/button_border" />
+                android:adjustViewBounds="true" />
         </FrameLayout>
 
     </LinearLayout>

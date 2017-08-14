@@ -37,11 +37,13 @@ public class ClassListRecyclerViewAdapter extends RecyclerView.Adapter<ClassList
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.user = mValues.get(position);
-        holder.mClassNameView.setText(mValues.get(position).ClassId);
+        holder.mStudentPositionView.setText(String.valueOf(mValues.get(position).StudentPosition));
         holder.mFirstNameView.setText(mValues.get(position).FirstName);
         holder.mLastNameView.setText(mValues.get(position).LastName);
-        holder.mLessonOrderView.setText(mValues.get(position).LessonCompletedOrder);
+        holder.mLessonOrderView.setText(String.valueOf(mValues.get(position).LessonCompletedOrder));
+        holder.mAccuracyView.setText(String.valueOf(mValues.get(position).Accuracy + "%"));
 
+        /*
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +54,7 @@ public class ClassListRecyclerViewAdapter extends RecyclerView.Adapter<ClassList
                 }
             }
         });
+        */
     }
 
     @Override
@@ -61,7 +64,7 @@ public class ClassListRecyclerViewAdapter extends RecyclerView.Adapter<ClassList
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mClassNameView;
+        public final TextView mStudentPositionView;
         public final TextView mFirstNameView;
         public final TextView mLastNameView;
         public final TextView mLessonOrderView;
@@ -71,7 +74,7 @@ public class ClassListRecyclerViewAdapter extends RecyclerView.Adapter<ClassList
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mClassNameView = (TextView) view.findViewById(R.id.class_name);
+            mStudentPositionView = (TextView) view.findViewById(R.id.class_studentPosition);
             mFirstNameView = (TextView) view.findViewById(R.id.class_firstName);
             mLastNameView = (TextView)view.findViewById(R.id.class_lastName);
             mLessonOrderView = (TextView)view.findViewById(R.id.class_lessonOrder);

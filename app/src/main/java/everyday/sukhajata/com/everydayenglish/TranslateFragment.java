@@ -137,8 +137,6 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
 
         FlexboxLayout flexboxLayout = (FlexboxLayout) layout.findViewById(R.id.translate_flexbox);
 
-        int i = 0;
-
         for (SlideMedia slideMedia : mSlide.MediaList) {
             FrameLayout frame = new FrameLayout(getActivity());
             frame.setPadding(7,7,7,7);
@@ -150,13 +148,10 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
             ViewGroup.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             btn.setLayoutParams(buttonLayoutParams);
-            SlideMedia word = mSlide.MediaList.get(i);
-            setupButton(frame, btn, word);
+            setupButton(frame, btn, slideMedia);
 
             frame.addView(btn);
             flexboxLayout.addView(frame);
-
-            i++;
         }
 
         Button btnNext = (Button)layout.findViewById(R.id.translate_btnNext);
@@ -181,7 +176,11 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
                                  final SlideMedia word) {
         button.setPadding(14,14,14,14);
         button.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null));
-        button.setText(word.English.toLowerCase());
+        if (word.English.toLowerCase().equals("i")) {
+            button.setText(word.English);
+        } else {
+            button.setText(word.English.toLowerCase());
+        }
         button.setTextSize(20);
         button.setTextColor(ResourcesCompat.getColor(getResources(),R.color.colorLabelBackground, null));
         button.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +205,14 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
             //ContentManager.playAudio(word.English, word.AudioFileName);
             removeFrame(frame);
             visibleFrames.remove(frame);
-            txtEnglish.setText(txtEnglish.getText() + " " + word.English.toLowerCase());
+            if (index == 0) {
+                String upperString = word.English.substring(0,1).toUpperCase() + word.English.substring(1);
+                txtEnglish.setText(upperString);
+            }else if (word.English.equals("I")) {
+                txtEnglish.setText(txtEnglish.getText() + " " + word.English);
+            } else {
+                txtEnglish.setText(txtEnglish.getText() + " " + word.English.toLowerCase());
+            }
             index++;
 
             if (mQueue.isEmpty()) {

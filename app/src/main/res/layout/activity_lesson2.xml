@@ -22,6 +22,9 @@
             android:id="@+id/lesson_instructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:padding="5dp"
+            android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
         <ImageView
             android:id="@+id/lesson_home"

@@ -1,41 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/class_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/class_studentPosition"
+        app:layout_widthPercent="15%"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:text="5-1"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/class_firstName"
-        android:layout_width="wrap_content"
+        app:layout_widthPercent="25%"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_toRightOf="@id/class_studentPosition"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:text="เ้ำพดำพ"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/class_lastName"
-        android:layout_width="wrap_content"
+        app:layout_widthPercent="25%"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_toRightOf="@id/class_firstName"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:text="พำอำพ"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/class_lessonOrder"
-        android:layout_width="wrap_content"
+        app:layout_widthPercent="15%"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_toRightOf="@id/class_lastName"
+        android:gravity="right"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:text="53"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/class_accuracy"
-        android:layout_width="wrap_content"
+        app:layout_widthPercent="20%"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_toRightOf="@id/class_lessonOrder"
+        android:gravity="right"
+        android:textSize="15dp"
+        android:padding="5dp"
+        android:text="90%"
         android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+</android.support.percent.PercentRelativeLayout>

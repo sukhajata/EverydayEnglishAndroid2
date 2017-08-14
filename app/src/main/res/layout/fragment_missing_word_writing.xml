@@ -9,7 +9,13 @@
     android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
+        android:id="@+id/missingWordWriting_txtThai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LabelTargetThai"/>
+    <TextView
         android:id="@+id/missingWordWriting_txtTarget"
+        android:layout_below="@id/missingWordWriting_txtThai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/LabelTarget"/>

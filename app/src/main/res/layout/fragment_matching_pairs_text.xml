@@ -9,7 +9,7 @@
         android:id="@+id/matchingPairsText_frame1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/matchingPairsText_buttonText1"
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         android:id="@+id/matchingPairsText_frame2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/matchingPairsText_buttonText2"
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         android:id="@+id/matchingPairsText_frame3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/matchingPairsText_buttonThai1"
             android:layout_width="match_parent"
@@ -44,8 +44,7 @@
         android:id="@+id/matchingPairsText_frame4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border"
-        android:layout_marginBottom="@dimen/spacer">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/matchingPairsText_buttonThai2"
             android:layout_width="match_parent"

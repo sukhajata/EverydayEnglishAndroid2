@@ -24,6 +24,7 @@ public class User implements Parcelable{
     public int ModuleId;
     public int LessonCompletedOrder;
     public int Active;
+    public double Accuracy;
 
     public User (int id, String email, int lessonCompletedOrder) {
         Id = id;
@@ -32,7 +33,7 @@ public class User implements Parcelable{
     }
 
     public User(int id, int studentPosition, int studentId, String gender, String firstName, String lastName,
-                 String password, int classId, int moduleId, int lessonCompletedOrder, int active) {
+                 String password, int classId, int moduleId, int lessonCompletedOrder, int active, double accuracy) {
         Id = id;
         Email = "";
         StudentPosition = studentPosition;
@@ -45,7 +46,7 @@ public class User implements Parcelable{
         ModuleId = moduleId;
         LessonCompletedOrder = lessonCompletedOrder;
         Active = active;
-
+        Accuracy = accuracy;
     }
     @Override
     public int describeContents() {
@@ -70,7 +71,7 @@ public class User implements Parcelable{
         out.writeInt(ModuleId);
         out.writeInt(LessonCompletedOrder);
         out.writeInt(Active);
-
+        out.writeDouble(Accuracy);
     }
 
     // Using the `in` variable, we can retrieve the values that
@@ -89,6 +90,7 @@ public class User implements Parcelable{
         ModuleId = in.readInt();
         LessonCompletedOrder = in.readInt();
         Active = in.readInt();
+        Accuracy = in.readDouble();
     }
 
     public static final Parcelable.Creator<User> CREATOR

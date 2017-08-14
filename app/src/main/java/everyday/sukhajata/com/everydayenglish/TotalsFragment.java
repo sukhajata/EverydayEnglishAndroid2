@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.android.volley.toolbox.StringRequest;
 
 
 /**
@@ -19,9 +24,13 @@ import android.view.ViewGroup;
  */
 public class TotalsFragment extends Fragment {
 
+    public static final String ARG_NAME_CORRECT = "Correct";
+    public static final String ARG_NAME_ERRORS = "Errors";
     public static final String ARG_NAME_WORD_TOTAL = "WordTotal";
     public static final String ARG_NAME_PERCENTAGE = "Percentage";
 
+    private int mCorrect;
+    private int mErrors;
     private int mWordTotal;
     private double mPercentage;
 
@@ -39,9 +48,11 @@ public class TotalsFragment extends Fragment {
      * @param percentage Parameter 2.
      * @return A new instance of fragment TotalsFragment.
      */
-    public static TotalsFragment newInstance(int wordTotal, double percentage){
+    public static TotalsFragment newInstance(int correct, int errors, int wordTotal, double percentage){
         TotalsFragment fragment = new TotalsFragment();
         Bundle args = new Bundle();
+        args.putInt(ARG_NAME_CORRECT, correct);
+        args.putInt(ARG_NAME_ERRORS, errors);
         args.putInt(ARG_NAME_WORD_TOTAL, wordTotal);
         args.putDouble(ARG_NAME_PERCENTAGE, percentage);
         fragment.setArguments(args);
@@ -52,6 +63,8 @@ public class TotalsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            mCorrect = getArguments().getInt(ARG_NAME_CORRECT);
+            mErrors = getArguments().getInt(ARG_NAME_ERRORS);
             mWordTotal = getArguments().getInt(ARG_NAME_WORD_TOTAL);
             mPercentage = getArguments().getDouble(ARG_NAME_PERCENTAGE);
         }
@@ -61,7 +74,41 @@ public class TotalsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_totals, container, false);
+        RelativeLayout view =  (RelativeLayout)inflater.inflate(R.layout.fragment_totals, container, false);
+
+        TextView txtCorrect = (TextView)view.findViewById(R.id.totals_txtCorrect);
+        txtCorrect.setText(String.valueOf(mCorrect));
+
+        TextView txtErrors = (TextView)view.findViewById(R.id.totals_txtErrors);
+        txtErrors.setText(String.valueOf(mErrors));
+
+        TextView txtWordTotal = (TextView)view.findViewById(R.id.totals_wordTotal);
+        if (mWordTotal > 0) {
+            txtWordTotal.setText(String.valueOf(mWordTotal));
+        } else {
+            TextView lblWordTotal = (TextView)view.findViewById(R.id.totals_lblWordTotal);
+            lblWordTotal.setVisibility(View.GONE);
+            txtWordTotal.setVisibility(View.GONE);
+        }
+
+        TextView txtPercentage = (TextView)view.findViewById(R.id.totals_txtPercentage);
+        if (mPercentage > 0) {
+            txtPercentage.setText(String.valueOf(mPercentage));
+        } else {
+            TextView lblPercentage = (TextView)view.findViewById(R.id.totals_lblPercentage);
+            lblPercentage.setVisibility(View.GONE);
+            txtPercentage.setVisibility(View.GONE);
+        }
+
+        Button btnNext = (Button)view.findViewById(R.id.totals_btnContinue);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onFragmentInteraction();
+            }
+        });
+
+        return view;
     }
 
 

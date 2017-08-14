@@ -70,6 +70,8 @@ public class MyLessonRecyclerViewAdapter extends RecyclerView.Adapter<MyLessonRe
             //set duller background colors
             holder.mTitleBar.setBackgroundColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorPrimaryLight, null));
             holder.mDescriptionView.setBackgroundColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorLightGrey, null));
+            holder.mDateCompletedView.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorGrey, null));
+            holder.mNameView.setTextColor(ResourcesCompat.getColor(mContext.getResources(), R.color.colorGrey, null));
         }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

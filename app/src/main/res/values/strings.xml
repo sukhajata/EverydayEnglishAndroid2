@@ -26,6 +26,11 @@
     <string name="firstName">ชื่อ</string>
     <string name="lastName">นามสกุล</string>
     <string name="login2">ล็อคอิน</string>
+    <string name="correct">ถูกต้อง</string>
+    <string name="home">บ้าน</string>
+    <string name="mistakes">ผิดพลาด</string>
+    <string name="total_words">จำนวนคำ</string>
+    <string name="percentage_of_english">เปอร์เซ็นต์ภาษาอังกฤษ</string>
     <string name="title_activity_lesson">LessonActivity</string>
     <string name="title_activity_setup">SetupActivity</string>
 </resources>

@@ -7,6 +7,11 @@
     android:background="@color/colorLabelBackground"
     android:orientation="vertical"
     tools:context="everyday.sukhajata.com.everydayenglish.TranslateFragment">
+    <TextView
+        android:id="@+id/translate_txtTarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LabelTargetThai"/>
     <RelativeLayout
         android:id="@+id/translate_topLayout"
         android:layout_width="match_parent"
@@ -24,11 +29,6 @@
             android:layout_centerVertical="true"
             style="@style/LabelTarget"/>
     </RelativeLayout>
-    <TextView
-        android:id="@+id/translate_txtTarget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/LabelTargetThai"/>
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/translate_flexbox"
