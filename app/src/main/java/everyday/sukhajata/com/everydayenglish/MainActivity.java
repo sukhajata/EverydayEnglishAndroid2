@@ -2,8 +2,11 @@ package everyday.sukhajata.com.everydayenglish;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +59,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
         showProgressDialog();
         mAudioSetupComplete = false;
-        ContentManager.setupAudio(getApplicationContext(), this, this);
+        ContentManager.setupAudio(this, this, this);
+        ContentManager.setupImageCaching(this);
 
         //calculate the size of images for this device and set url for image download
         DisplayMetrics metrics = new DisplayMetrics();
@@ -67,7 +71,9 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         EverydayLanguageDbHelper dbHelper = EverydayLanguageDbHelper.getInstance(getApplicationContext());
         User user = dbHelper.getActiveUser();
         if (user != null) {
-           syncUser(user);
+            getSupportActionBar().setTitle(user.FirstName);
+            syncUser(user);
+
         } else  {
             //select user or create new
             LoginFragment loginFragment = LoginFragment.newInstance();
@@ -83,6 +89,42 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
         }
 
+
+    }
+
+    private boolean connected() {
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+
+        return isConnected;
+        /*
+        if (!isConnected) {
+            // 1. Instantiate an AlertDialog.Builder with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage(R.string.connect_to_network)
+                    .setTitle(R.string.no_internet)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            checkConnection();
+                        }
+                    });
+            // 3. Get the AlertDialog from create()
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            //Toast.makeText(getActivity(), R.string.connect_to_network, Toast.LENGTH_LONG).show();
+        } else {
+
+
+        }
+        */
 
     }
 
@@ -108,7 +150,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                 .getInstance(this)
                 .checkForLesson(user.LessonCompletedOrder + 1, user.ModuleId);
 
-        if (!nextLessonCached) {
+        /*
+        if (!nextLessonCached && connected()) {
             showProgressDialog();
             int lastLessonId = EverydayLanguageDbHelper
                     .getInstance(this)
@@ -119,6 +162,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             ContentManager.downloadLessons(this, lastLessonId, this);
             ContentManager.downloadSlides(this, lastLessonId, this);
         }
+        */
 
         LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
         getSupportFragmentManager()
@@ -249,7 +293,17 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         AlertDialog dialog = builder.create();
         dialog.show();
         Log.e("SUKH", "Download error: " + msg);
+        hideProgressDialog();
     }
+
+    private boolean waiting() {
+        if (!mWaitingForLessonsCompleted && !mWaitingForLessons && !mWaitingForSlides && mAudioSetupComplete) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public void onDownloadFinished(String code, String type) {
@@ -257,7 +311,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             if (type.equals(DownloadCallback.TYPE_LESSONS)) {
                 mWaitingForLessons = false;
 
-                if (!mWaitingForSlides && !mWaitingForLessonsCompleted) {
+                if (!waiting()) {
                     hideProgressDialog();
 
                     User user = EverydayLanguageDbHelper
@@ -275,7 +329,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             } else if (type.equals(DownloadCallback.TYPE_PULL_LESSONS_COMPLETED)) {
                 mWaitingForLessonsCompleted = false;
 
-                if (!mWaitingForLessons && !mWaitingForSlides) {
+                if (!waiting()) {
                     hideProgressDialog();
 
                     User user = EverydayLanguageDbHelper
@@ -291,7 +345,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             } else if (type.equals(DownloadCallback.TYPE_SLIDES)) {
                 mWaitingForSlides = false;
 
-                if (!mWaitingForLessons && !mWaitingForLessonsCompleted) {
+                if (!waiting()) {
                     hideProgressDialog();
 
                     User user = EverydayLanguageDbHelper
@@ -474,7 +528,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
         } else {
             mAudioSetupComplete = true;
-            if (!mWaitingForLessons && !mWaitingForSlides && !mWaitingForLessonsCompleted) {
+            if (waiting()) {
                 hideProgressDialog();
             }
         }
@@ -483,7 +537,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     public void onLoginFragmentInteraction(User user) {
 
         if (user != null) {
-           syncUser(user);
+            getSupportActionBar().setTitle(user.FirstName);
+            syncUser(user);
         }
     }
 

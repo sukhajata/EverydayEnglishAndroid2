@@ -82,7 +82,7 @@ public class TotalsFragment extends Fragment {
         TextView txtErrors = (TextView)view.findViewById(R.id.totals_txtErrors);
         txtErrors.setText(String.valueOf(mErrors));
 
-        TextView txtWordTotal = (TextView)view.findViewById(R.id.totals_wordTotal);
+        TextView txtWordTotal = (TextView)view.findViewById(R.id.totals_txtTotalWords);
         if (mWordTotal > 0) {
             txtWordTotal.setText(String.valueOf(mWordTotal));
         } else {

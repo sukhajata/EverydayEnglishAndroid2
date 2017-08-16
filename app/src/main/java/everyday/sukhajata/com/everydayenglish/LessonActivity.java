@@ -85,10 +85,15 @@ public class LessonActivity extends AppCompatActivity
                 .getSlideCompleted(mUserId, mLesson.Id);
 
         if (slideCompleted > 0) {
-            mCurrentSlide = slideCompleted - 1;
+            mCurrentSlide = slideCompleted;
         }
 
-        if (mCurrentSlide >= mLesson.Pages.size()) {
+        //if this lesson has already been completed, remove values from slideCompleted table
+        EverydayLanguageDbHelper
+                .getInstance(this)
+                .checkClearSlideCompleted(mUserId, mModuleId, mLesson.Id, mLesson.LessonOrder);
+
+        if (mCurrentSlide >= mLesson.Pages.size() - 1) {
             mCurrentSlide = 0;
         }
 
@@ -132,10 +137,6 @@ public class LessonActivity extends AppCompatActivity
             }
         });
 
-        //if this lesson has already been completed, remove values from slideCompleted table
-        EverydayLanguageDbHelper
-                .getInstance(this)
-                .checkClearSlideCompleted(mUserId, mModuleId, mLesson.Id, mLesson.LessonOrder);
 
         moveNext();
 
