@@ -93,7 +93,7 @@ public class QuestionFragment extends Fragment {
         txtContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContentManager.playAudio(getActivity(), mPage.Content);
+                ((MyApplication)getActivity().getApplication()).playAudio(mPage.Content);
             }
         });
 
@@ -101,7 +101,7 @@ public class QuestionFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(getActivity(), mPage.Content);
+                ((MyApplication)getActivity().getApplication()).playAudio(mPage.Content);
             }
         });
 
@@ -174,7 +174,7 @@ public class QuestionFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ContentManager.playAudio(getActivity(), mTarget.English);
+        ((MyApplication)getActivity().getApplication()).playAudio(mTarget.English);
     }
 
 

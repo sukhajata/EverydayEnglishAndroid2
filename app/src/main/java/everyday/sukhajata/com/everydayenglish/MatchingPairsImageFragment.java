@@ -170,9 +170,7 @@ public class MatchingPairsImageFragment extends Fragment implements AudioFinishe
         frame.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorBorderSelected, null));
 
         audioQueue.add(mSelectedTextPhrase.English);
-        ContentManager.playAudio(
-                getActivity(),
-                mSelectedTextPhrase.English);
+        ((MyApplication)getActivity().getApplication()).playAudio(mSelectedTextPhrase.English);
 
         if (mSelectedImagePhrase != null) {
 

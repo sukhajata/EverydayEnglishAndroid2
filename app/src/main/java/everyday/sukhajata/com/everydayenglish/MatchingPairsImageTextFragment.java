@@ -165,7 +165,7 @@ public class MatchingPairsImageTextFragment extends Fragment {
 
         mSelectedTextFrame = frame;
         mSelectedTextPhrase = (SlideMedia)button.getTag();
-        ContentManager.playAudio(getActivity(), mSelectedTextPhrase.English);
+        ((MyApplication)getActivity().getApplication()).playAudio(mSelectedTextPhrase.English);
 
         frame.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(), R.color.colorBorderSelected, null));
 

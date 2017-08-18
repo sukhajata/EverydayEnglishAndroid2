@@ -76,7 +76,27 @@ public class MissingWordWritingFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_missing_word_writing, container, false);
 
         ((TextView)view.findViewById(R.id.missingWordWriting_txtThai)).setText(mSlide.ContentThai);
-        ((TextView)view.findViewById(R.id.missingWordWriting_txtTarget)).setText(mSlide.Content);
+
+        final TextView txtEnglish = ((TextView)view.findViewById(R.id.missingWordWriting_txtTarget));
+        txtEnglish.setText(mSlide.Content);
+
+        final Button btnNext = (Button)view.findViewById(R.id.missingWordWriting_btnNext);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSlideCompleted(mSlide.Id, errorCount);
+            }
+        });
+
+        final Button btnSkip = (Button)view.findViewById(R.id.missingWordWriting_btnSkip);
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSlideCompleted(mSlide.Id, 1);
+            }
+        });
+
+        final String answer = mSlide.MediaList.get(0).English;
 
         EditText edit = ((EditText)view.findViewById(R.id.missingWordWriting_txtWriting));
         edit.addTextChangedListener(new TextWatcher() {
@@ -87,14 +107,21 @@ public class MissingWordWritingFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().toLowerCase().equals(mSlide.MediaList.get(0).English.toLowerCase())) {
-                    //hide keyboard
+                if (s.toString().toLowerCase().equals(answer.toLowerCase())) {
+                    //correct answer
                     InputMethodManager inputManager = (InputMethodManager)getActivity()
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
 
-                    mListener.onSlideCompleted(mSlide.Id, 0);
+                    final String sentence = mSlide.Content.substring(0, mSlide.Content.indexOf('_')) +
+                            answer + mSlide.Content.substring(mSlide.Content.lastIndexOf('_') + 1);
+                    txtEnglish.setText(sentence);
+
+                    ((MyApplication)getActivity().getApplication()).playAudio(sentence);
+
+                    btnNext.setEnabled(true);
+                    btnSkip.setVisibility(View.GONE);
                 }
             }
 
@@ -108,13 +135,6 @@ public class MissingWordWritingFragment extends Fragment {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
 
-        Button btnSkip = (Button)view.findViewById(R.id.missingWordWriting_btnSkip);
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onSlideCompleted(mSlide.Id, 1);
-            }
-        });
 
         return view;
     }

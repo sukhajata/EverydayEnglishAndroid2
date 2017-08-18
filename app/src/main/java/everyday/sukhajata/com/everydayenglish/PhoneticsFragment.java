@@ -78,9 +78,7 @@ public class PhoneticsFragment extends Fragment {
         txtWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(
-                        getActivity(),
-                        slideMedia.English);
+                ((MyApplication)getActivity().getApplication()).playAudio(slideMedia.English);
             }
         });
 
@@ -88,7 +86,7 @@ public class PhoneticsFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(getActivity(), slideMedia.English);
+                ((MyApplication)getActivity().getApplication()).playAudio(slideMedia.English);
             }
         });
 

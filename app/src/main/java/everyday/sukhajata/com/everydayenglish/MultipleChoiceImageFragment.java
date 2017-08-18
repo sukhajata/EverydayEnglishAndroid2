@@ -96,7 +96,7 @@ public class MultipleChoiceImageFragment extends Fragment {
         txtTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(getActivity(), mTarget.English);
+                ((MyApplication)getActivity().getApplication()).playAudio(mTarget.English);
             }
         });
 
@@ -104,7 +104,7 @@ public class MultipleChoiceImageFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(getActivity(), mTarget.English);
+                ((MyApplication)getActivity().getApplication()).playAudio(mTarget.English);
             }
         });
 
@@ -165,7 +165,7 @@ public class MultipleChoiceImageFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ContentManager.playAudio(getActivity(), mTarget.English);
+        ((MyApplication)getActivity().getApplication()).playAudio(mTarget.English);
     }
 
     @Override

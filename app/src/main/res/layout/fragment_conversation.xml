@@ -247,6 +247,60 @@
                    android:padding="10dp" />
            </RelativeLayout>
 
+           <RelativeLayout
+               android:id="@+id/conversation_speech9"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <ImageView
+                   android:id="@+id/conversation_panda5"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@mipmap/ic_panda"/>
+               <ImageView
+                   android:id="@+id/conversation_arrow9"
+                   android:layout_width="30dp"
+                   android:layout_height="30dp"
+                   android:layout_toRightOf="@id/conversation_panda5"
+                   android:layout_marginRight="-10dp"
+                   android:layout_marginTop="10dp"
+                   android:src="@drawable/arrow_bg2"/>
+               <TextView
+                   android:id="@+id/conversation_text9"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_toRightOf="@id/conversation_arrow9"
+                   android:layout_marginTop="10dp"
+                   android:background="@drawable/rounded_corner1"
+                   android:padding="10dp" />
+           </RelativeLayout>
+
+           <RelativeLayout
+               android:id="@+id/conversation_speech10"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <ImageView
+                   android:id="@+id/conversation_giraffe5"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:src="@mipmap/ic_giraffe"/>
+               <ImageView
+                   android:id="@+id/conversation_arrow10"
+                   android:layout_width="30dp"
+                   android:layout_height="30dp"
+                   android:layout_toLeftOf="@id/conversation_giraffe5"
+                   android:layout_marginLeft="-10dp"
+                   android:layout_marginTop="10dp"
+                   android:src="@drawable/arrow_bg1"/>
+               <TextView
+                   android:id="@+id/conversation_text10"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_toLeftOf="@id/conversation_arrow10"
+                   android:layout_marginTop="10dp"
+                   android:background="@drawable/rounded_corner"
+                   android:padding="10dp" />
+           </RelativeLayout>
 
        </LinearLayout>
         <Button

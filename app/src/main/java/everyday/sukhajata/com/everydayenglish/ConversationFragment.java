@@ -87,7 +87,7 @@ public class ConversationFragment extends Fragment {
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContentManager.playAudio(getActivity(), mSlide.MediaList.get(0).English);
+                ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(0).English);
             }
         });
 
@@ -97,7 +97,7 @@ public class ConversationFragment extends Fragment {
         txt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContentManager.playAudio(getActivity(), mSlide.MediaList.get(1).English);
+                ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(1).English);
             }
         });
 
@@ -107,7 +107,7 @@ public class ConversationFragment extends Fragment {
         txt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContentManager.playAudio(getActivity(), mSlide.MediaList.get(2).English);
+                ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(2).English);
             }
         });
 
@@ -119,7 +119,7 @@ public class ConversationFragment extends Fragment {
             txt4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(3).English);
+                    ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(3).English);
                 }
             });
 
@@ -135,7 +135,7 @@ public class ConversationFragment extends Fragment {
             txt5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(4).English);
+                    ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(4).English);
                 }
             });
 
@@ -151,7 +151,7 @@ public class ConversationFragment extends Fragment {
             txt6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(5).English);
+                    ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(5).English);
                 }
             });
 
@@ -167,7 +167,7 @@ public class ConversationFragment extends Fragment {
             txt7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(6).English);
+                    ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(6).English);
                 }
             });
 
@@ -183,12 +183,44 @@ public class ConversationFragment extends Fragment {
             txt8.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ContentManager.playAudio(getActivity(), mSlide.MediaList.get(7).English);
+                    ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(7).English);
                 }
             });
 
         } else {
             RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech8);
+            textContainer.removeView(relativeLayout);
+        }
+
+        if (mSlide.MediaList.size() > 8) {
+            String speech9 = mSlide.MediaList.get(8).English + "\n" + mSlide.MediaList.get(8).Thai;
+            TextView txt9 = (TextView)view.findViewById(R.id.conversation_text9);
+            txt9.setText(speech9);
+            txt9.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(8).English);
+                }
+            });
+
+        } else {
+            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech9);
+            textContainer.removeView(relativeLayout);
+        }
+
+        if (mSlide.MediaList.size() > 9) {
+            String speech10 = mSlide.MediaList.get(9).English + "\n" + mSlide.MediaList.get(9).Thai;
+            TextView txt10 = (TextView)view.findViewById(R.id.conversation_text10);
+            txt10.setText(speech10);
+            txt10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((MyApplication)getActivity().getApplication()).playAudio(mSlide.MediaList.get(9).English);
+                }
+            });
+
+        } else {
+            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.conversation_speech10);
             textContainer.removeView(relativeLayout);
         }
 
@@ -231,7 +263,7 @@ public class ConversationFragment extends Fragment {
             txt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ContentManager.playAudio(getActivity(), slideMedia.English);
+                    ((MyApplication)getActivity().getApplication()).playAudio(slideMedia.English);
                 }
             });
 

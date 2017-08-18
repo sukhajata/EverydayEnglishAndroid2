@@ -1,6 +1,7 @@
 package everyday.sukhajata.com.everydayenglish;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -58,6 +59,9 @@ public class LessonActivity extends AppCompatActivity
     private int mCurrentSlide;
     private int mModuleId;
     private Fragment mCurrentFragment;
+    private ProgressDialog progressDialog;
+    private boolean mWaitingForAudio;
+    private boolean mSetupComplete;
     //private ArrayList<ImageView> stars;
 
 
@@ -65,9 +69,6 @@ public class LessonActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson2);
-
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.lesson_toolbar);
-        //setSupportActionBar(toolbar);
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -137,9 +138,27 @@ public class LessonActivity extends AppCompatActivity
             }
         });
 
+        mSetupComplete = true;
+        if (!mWaitingForAudio) {
+            moveNext();
+        }
 
-        moveNext();
+    }
 
+    private void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+        }
+    }
+
+    private void hideProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
     }
 
     private void moveNext() {
@@ -297,7 +316,6 @@ public class LessonActivity extends AppCompatActivity
             }
         }
 
-
     }
 
     public void onAudioFinished(String key) {
@@ -310,6 +328,9 @@ public class LessonActivity extends AppCompatActivity
 
 
     public void onAudioSetupComplete(int code) {
+        mWaitingForAudio = false;
+        hideProgressDialog();
+
         if (code == AUDIO_SETUP_MISSING_LANGUAGE) {
             Intent installTTSIntent = new Intent();
             installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
@@ -319,7 +340,7 @@ public class LessonActivity extends AppCompatActivity
                     TextToSpeech.Engine.EXTRA_CHECK_VOICE_DATA_FOR, languages);
             startActivityForResult(installTTSIntent, CHECK_DATA_CODE);
 
-        } else {
+        } else if (mSetupComplete){
             moveNext();
         }
     }
@@ -327,7 +348,9 @@ public class LessonActivity extends AppCompatActivity
     @Override
     public void onStart(){
         super.onStart();
-        //ContentManager.setupAudio(getApplicationContext(), this, this);
+       // mWaitingForAudio = true;
+        //showProgressDialog();
+        //ContentManager.setupAudio(this, this, this);
     }
 
     @Override
@@ -336,11 +359,10 @@ public class LessonActivity extends AppCompatActivity
 
     }
 
-
     @Override
     public void onStop() {
         super.onStop();
-        //ContentManager.releaseResources();
+        //ContentManager.shutDownAudio();
     }
 
 

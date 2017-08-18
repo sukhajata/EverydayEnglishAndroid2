@@ -59,7 +59,8 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
 
         showProgressDialog();
         mAudioSetupComplete = false;
-        ContentManager.setupAudio(this, this, this);
+        ((MyApplication)getApplication()).setupAudio(this);
+
         ContentManager.setupImageCaching(this);
 
         //calculate the size of images for this device and set url for image download
@@ -192,7 +193,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
     @Override
     public void onPause(){
         super.onPause();
-        ContentManager.shutDownAudio();
+        //ContentManager.shutDownAudio();
     }
 
     private void launchLesson(Lesson lesson) {
@@ -213,7 +214,6 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             Intent intent = new Intent(this, LessonActivity.class);
             Bundle bundle = new Bundle();
             bundle.putParcelable(LessonActivity.ARG_NAME_LESSON, lesson);
-            //bundle.putString(LessonActivity.ARG_NAME_LESSON, lesson);
             bundle.putString(LessonActivity.ARG_NAME_IMAGE_URL, imageUrl);
             bundle.putInt(LessonActivity.ARG_NAME_USER_ID, user.Id);
             bundle.putInt(LessonActivity.ARG_NAME_MODULE_ID, user.ModuleId);
@@ -296,7 +296,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
         hideProgressDialog();
     }
 
-    private boolean waiting() {
+    private boolean notWaiting() {
         if (!mWaitingForLessonsCompleted && !mWaitingForLessons && !mWaitingForSlides && mAudioSetupComplete) {
             return true;
         } else {
@@ -311,7 +311,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             if (type.equals(DownloadCallback.TYPE_LESSONS)) {
                 mWaitingForLessons = false;
 
-                if (!waiting()) {
+                if (notWaiting()) {
                     hideProgressDialog();
 
                     User user = EverydayLanguageDbHelper
@@ -329,7 +329,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             } else if (type.equals(DownloadCallback.TYPE_PULL_LESSONS_COMPLETED)) {
                 mWaitingForLessonsCompleted = false;
 
-                if (!waiting()) {
+                if (notWaiting()) {
                     hideProgressDialog();
 
                     User user = EverydayLanguageDbHelper
@@ -345,7 +345,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             } else if (type.equals(DownloadCallback.TYPE_SLIDES)) {
                 mWaitingForSlides = false;
 
-                if (!waiting()) {
+                if (notWaiting()) {
                     hideProgressDialog();
 
                     User user = EverydayLanguageDbHelper
@@ -526,9 +526,26 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                     TextToSpeech.Engine.EXTRA_CHECK_VOICE_DATA_FOR, languages);
             startActivityForResult(installTTSIntent, LessonActivity.CHECK_DATA_CODE);
 
-        } else {
+        } else if (code == AUDIO_SETUP_FAILURE) {
+            // 1. Instantiate an AlertDialog.Builder with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage(R.string.connect_to_network)
+                    .setTitle("Text to speech setup failed.")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+            // 3. Get the AlertDialog from create()
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+        } else if (code == AUDIO_SETUP_SUCCESS) {
             mAudioSetupComplete = true;
-            if (waiting()) {
+            if (notWaiting()) {
                 hideProgressDialog();
             }
         }

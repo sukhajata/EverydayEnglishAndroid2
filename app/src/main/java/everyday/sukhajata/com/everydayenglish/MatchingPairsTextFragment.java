@@ -149,7 +149,7 @@ public class MatchingPairsTextFragment extends Fragment {
             mImageView.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(),
                     R.color.colorLabelBackground, null));
         }
-        ContentManager.playAudio(getActivity(), mSelectedEnglishPhrase.English);
+        ((MyApplication)getActivity().getApplication()).playAudio( mSelectedEnglishPhrase.English);
         mSelectedEnglishFrame.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(), R.color.colorBorderSelected, null));
 
         if (mSelectedThaiFrame != null) {

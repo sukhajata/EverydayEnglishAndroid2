@@ -33,7 +33,7 @@ import everyday.sukhajata.com.everydayenglish.utility.ContentManager;
  * Use the {@link BingoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BingoFragment extends Fragment {
+public class   BingoFragment extends Fragment {
 
     private Slide mSlide;
     private SlideCompletedListener mListener;
@@ -98,7 +98,7 @@ public class BingoFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContentManager.playAudio(getActivity(), targetWord.English);
+                ((MyApplication)getActivity().getApplication()).playAudio(targetWord.English);
             }
         });
 
@@ -231,13 +231,13 @@ public class BingoFragment extends Fragment {
                 } else {
                     imgTarget.setImageResource(android.R.color.transparent);
                 }
-                ContentManager.playAudio(getActivity(), targetWord.English);
+                ((MyApplication)getActivity().getApplication()).playAudio(targetWord.English);
 
             }
         } else {
             errorCount++;
             frame.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(), R.color.colorBorderWrong, null));
-            ContentManager.playAudio(getActivity(), targetWord.English);
+            ((MyApplication)getActivity().getApplication()).playAudio(targetWord.English);
         }
     }
 
@@ -253,7 +253,7 @@ public class BingoFragment extends Fragment {
         } else {
             imgTarget.setImageResource(android.R.color.transparent);
         }
-        ContentManager.playAudio(getActivity(), targetWord.English);
+        ((MyApplication)getActivity().getApplication()).playAudio(targetWord.English);
     }
 
     private void removeFrame(final FrameLayout frame) {

@@ -112,7 +112,7 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
         txtEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(getActivity(), mSlide.Content);
+                ((MyApplication)getActivity().getApplication()).playAudio(mSlide.Content);
 
             }
         });
@@ -121,7 +121,7 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentManager.playAudio(getActivity(), mSlide.Content);
+                ((MyApplication)getActivity().getApplication()).playAudio( mSlide.Content);
             }
         });
 
@@ -169,7 +169,7 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
     @Override
     public void onResume() {
         super.onResume();
-        ContentManager.playAudio(getActivity(), mTarget.English);
+        ((MyApplication)getActivity().getApplication()).playAudio(mTarget.English);
     }
 
     private void setupButton(final FrameLayout frame, Button button,
@@ -216,16 +216,17 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
             index++;
 
             if (mQueue.isEmpty()) {
-                //audioQueue.add(mSlide.Content);
-                ContentManager.playAudio(getActivity(), mSlide.Content);
+                //finished
+                ((MyApplication)getActivity().getApplication()).playAudio(mSlide.Content);
                 ((Button)mLayout.findViewById(R.id.translate_btnNext)).setEnabled(true);
+                ((TextView)mLayout.findViewById(R.id.translate_txtEnglish)).setText(mSlide.Content);
+
                 for (FrameLayout visibleFrame : visibleFrames) {
                     removeFrame(visibleFrame);
-                    //visibleFrames.remove(frame);
                 }
             } else {
                 mTarget = mQueue.poll();
-                ContentManager.playAudio(getActivity(), mTarget.English);
+                ((MyApplication)getActivity().getApplication()).playAudio( mTarget.English);
             }
         } else {
             errorCount++;

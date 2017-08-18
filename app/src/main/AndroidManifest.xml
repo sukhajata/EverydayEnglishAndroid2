@@ -5,8 +5,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,10 +21,11 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustNothing"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -34,21 +37,24 @@
             android:name=".SetupActivity"
             android:label="@string/title_activity_setup"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TotalsActivity"></activity>
-        <service
-            android:name=".AuthenticatorService">
+        <activity android:name=".TotalsActivity" />
+
+        <service android:name=".AuthenticatorService">
             <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator"/>
+                <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+
         <provider
             android:name=".StubProvider"
             android:authorities="com.example.android.datasync.provider"
             android:exported="false"
-            android:syncable="true"/>
+            android:syncable="true" />
+
     </application>
 
 </manifest>
