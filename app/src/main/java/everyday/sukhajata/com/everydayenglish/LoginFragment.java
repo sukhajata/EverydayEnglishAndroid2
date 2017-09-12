@@ -52,8 +52,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
+        checkConnection();
     }
 
     private void checkConnection() {
@@ -95,20 +94,42 @@ public class LoginFragment extends Fragment implements DownloadCallback {
         layout = (ScrollView)inflater.inflate(
                 R.layout.fragment_login, container, false);
 
-        final EditText password = (EditText)layout.findViewById(R.id.login_password);
+        //final EditText password = (EditText)layout.findViewById(R.id.login_password);
         final Button btnSubmit = (Button)layout.findViewById(R.id.login_submit);
 
         progressDialog = new ProgressDialog(getActivity());
-        Button btnFind = (Button)layout.findViewById(R.id.login_btnFind);
+        //Button btnFind = (Button)layout.findViewById(R.id.login_btnFind);
         final LoginFragment loginFragment = this;
 
+        final EditText txtLastName = (EditText)layout.findViewById(R.id.login_lastName);
+        txtLastName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                if (s.length() > 2) {
+                    btnSubmit.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        /*
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 btnFind_click();
             }
         });
+        */
 
+        /*
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -127,10 +148,61 @@ public class LoginFragment extends Fragment implements DownloadCallback {
 
             }
         });
+        */
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
+
+                EditText txtTeacherId = (EditText)layout.findViewById(R.id.login_teacherId);
+                int teacherId = 1;
+                try {
+                    teacherId = Integer.parseInt(txtTeacherId.getText().toString());
+                } catch (NumberFormatException) {
+                    txtTeacherId.setBackgroundColor(ResourcesCompat.getColor(layout.getResources(), R.color.colorBorderWrong, null));
+                    return;
+                }
+
+                EditText txtRoom = (EditText)layout.findViewById(R.id.login_room);
+                String room = txtRoom.getText().toString().replace('-', '/');
+
+                EditText txtStudentPosition = (EditText)layout.findViewById(R.id.login_studentPosition);
+                int studentPosition = 1;
+                try {
+                    studentPosition = Integer.parseInt(txtStudentPosition.getText().toString());
+                } catch (NumberFormatException) {
+                    txtStudentPosition.setBackgroundColor(ResourcesCompat.getColor(layout.getResources(), R.color.colorBorderWrong, null));
+                    return;
+                }
+
+                EditText txtFirstName = (EditText) layout.findViewById(R.id.login_firstName);
+                String firstName = txtFirstName.getText().toString();
+
+                EditText txtLastName = (EditText) layout.findViewById(R.id.login_lastName);
+                String lastName = txtLastName.getText().toString();
+
+                ContentManager.getUser(getActivity(), teacherId, room, studentPosition, firstName, lastName, loginFragment);
+
+                /*
+                User user = EverydayLanguageDbHelper
+                        .getInstance(getActivity())
+                        .getUser(classCode, studentPosition);
+                if (user != null) {
+                    EverydayLanguageDbHelper
+                            .getInstance(getActivity())
+                            .setActiveUser(user);
+
+                    EditText txtPassword = (EditText)layout.findViewById(R.id.login_password);
+                    txtPassword.setEnabled(true);
+
+                    progressDialog.dismiss();
+                } else {
+                    ContentManager.getUser(getActivity(), teacherId, room, studentPosition, firstName, lastName, this);
+                }
+
                 User user = EverydayLanguageDbHelper
                         .getInstance(getActivity())
                         .getActiveUser();
@@ -154,6 +226,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
                     }
 
                 }
+                */
             }
         });
 
@@ -220,6 +293,10 @@ public class LoginFragment extends Fragment implements DownloadCallback {
                     .getInstance(getActivity())
                     .setActiveUser(user);
 
+            progressDialog.dismiss();
+            mListener.onLoginFragmentInteraction(user);
+
+            /*
             EditText txtFirstName = (EditText) layout.findViewById(R.id.login_firstName);
             txtFirstName.setText(user.FirstName);
 
@@ -228,6 +305,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
 
             EditText txtPassword = (EditText) layout.findViewById(R.id.login_password);
             txtPassword.setEnabled(true);
+            */
         }
     }
 

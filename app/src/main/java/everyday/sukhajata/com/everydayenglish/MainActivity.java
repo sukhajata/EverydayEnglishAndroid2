@@ -30,7 +30,8 @@ import everyday.sukhajata.com.everydayenglish.utility.EverydayLanguageDbHelper;
 
 public class    MainActivity extends AppCompatActivity implements DownloadCallback,
         AudioSetupCallback, AudioFinishedCallback, NextLessonListener, LessonFragment.OnLessonFragmentInteractionListener,
-        LoginFragment.LoginFragmentInteractionListener, TotalsFragment.OnTotalsFragmentInteractionListener, ClassListFragment.ClassListFragmentInteractionListener{
+        LoginFragment.LoginFragmentInteractionListener, TotalsFragment.OnTotalsFragmentInteractionListener,
+        ClassListFragment.ClassListFragmentInteractionListener, com.squareup.picasso.Callback{
 
     public String imageUrl;
     public static final int USER_REQUEST_CODE = 1;
@@ -151,7 +152,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                 .getInstance(this)
                 .checkForLesson(user.LessonCompletedOrder + 1, user.ModuleId);
 
-        /*
+
         if (!nextLessonCached && connected()) {
             showProgressDialog();
             int lastLessonId = EverydayLanguageDbHelper
@@ -163,7 +164,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
             ContentManager.downloadLessons(this, lastLessonId, this);
             ContentManager.downloadSlides(this, lastLessonId, this);
         }
-        */
+
 
         LessonFragment lessonFragment = LessonFragment.newInstance(user.Id, user.ModuleId);
         getSupportFragmentManager()
@@ -204,7 +205,7 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                 .getInstance(this)
                 .getLessonImageNames(lesson.Id);
 
-        ContentManager.cacheImages(this, imageNames);
+        ContentManager.cacheImages(this, imageNames, this);
 
         User user = EverydayLanguageDbHelper
                 .getInstance(this)
@@ -796,6 +797,14 @@ public class    MainActivity extends AppCompatActivity implements DownloadCallba
                     .replace(R.id.main_content, lessonFragment)
                     .commitAllowingStateLoss();
         }
+    }
+
+    public void onSuccess(){
+
+    }
+
+    public void onError() {
+
     }
 
 }

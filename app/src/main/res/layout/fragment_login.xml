@@ -12,7 +12,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <!-- class code -->
+        <!-- class code
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,6 +24,34 @@
                 android:inputType="text"
                 android:hint="@string/classCode" />
         </android.support.design.widget.TextInputLayout>
+        -->
+
+        <!-- teacher code -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/login_teacherId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="@string/teacherId" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--Room -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/login_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="@string/room" />
+        </android.support.design.widget.TextInputLayout>
+
 
         <!-- Student Position Label -->
         <android.support.design.widget.TextInputLayout
@@ -38,6 +66,7 @@
                 android:hint="@string/childAt" />
         </android.support.design.widget.TextInputLayout>
 
+        <!--
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/login_btnFind"
             android:layout_width="fill_parent"
@@ -46,6 +75,7 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="@string/find"/>
+         -->
 
         <!--first name -->
         <android.support.design.widget.TextInputLayout
@@ -74,7 +104,7 @@
         </android.support.design.widget.TextInputLayout>
 
 
-        <!-- Password Label -->
+        <!-- Password Label
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,7 +117,8 @@
                 android:hint="@string/password"
                 android:enabled="false"/>
         </android.support.design.widget.TextInputLayout>
-
+        -->
+        
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/login_submit"
             android:layout_width="fill_parent"

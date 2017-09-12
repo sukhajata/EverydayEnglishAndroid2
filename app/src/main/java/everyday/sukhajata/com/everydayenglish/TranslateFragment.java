@@ -206,8 +206,8 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
             removeFrame(frame);
             visibleFrames.remove(frame);
             if (index == 0) {
-                String upperString = word.English.substring(0,1).toUpperCase() + word.English.substring(1);
-                txtEnglish.setText(upperString);
+                String firstLetterCapitalized = word.English.substring(0,1).toUpperCase() + word.English.substring(1);
+                txtEnglish.setText(firstLetterCapitalized);
             }else if (word.English.equals("I")) {
                 txtEnglish.setText(txtEnglish.getText() + " " + word.English);
             } else {

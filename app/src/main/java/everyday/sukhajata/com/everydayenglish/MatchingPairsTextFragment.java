@@ -115,7 +115,9 @@ public class MatchingPairsTextFragment extends Fragment {
 
     private  void setupEnglishButton(final Button button, SlideMedia slideMedia,
                                      final FrameLayout frame) {
-        button.setText(slideMedia.English);
+        String firstLetterCapitalized = slideMedia.English.substring(0,1).toUpperCase() + slideMedia.English.substring(1);
+        button.setText(firstLetterCapitalized);
+        //button.setText(slideMedia.English);
         button.setTag(slideMedia);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {

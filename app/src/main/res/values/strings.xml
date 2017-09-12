@@ -21,7 +21,9 @@
     <string name="downloading_lessons">ดาวน์โหลดบทเรียน</string>
     <string name="dont_know">ไม่ทราบ</string>
     <string name="childAt">เด็กที่</string>
+    <string name="room">ห้อง</string>
     <string name="classCode">รหัสชั้น</string>
+    <string name="teacherId">ครูีี่่ที่</string>
     <string name="find">หา</string>
     <string name="firstName">ชื่อ</string>
     <string name="lastName">นามสกุล</string>
