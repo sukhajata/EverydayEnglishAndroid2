@@ -28,7 +28,6 @@
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/bingo_flexbox"
-        android:layout_below="@id/bingo_txtTarget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:flexDirection="row"
@@ -180,7 +179,7 @@
         android:id="@+id/bingo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:adjustViewBounds="true"
-        android:layout_marginTop="15dp"/>
+        android:padding="5dp"
+        android:layout_marginTop="5dp"/>
 </LinearLayout>

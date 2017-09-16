@@ -51,7 +51,6 @@
             <Button
                 android:id="@+id/missingWordWriting_btnNext"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 style="@style/NavigationButton"
                 android:text="@string/next"
                 android:enabled="false"/>

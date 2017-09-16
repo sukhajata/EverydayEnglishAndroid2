@@ -305,9 +305,6 @@
        </LinearLayout>
         <Button
             android:id="@+id/conversation_btnNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:text="@string/next"
             style="@style/NavigationButton"/>
         </LinearLayout>

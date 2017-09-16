@@ -33,20 +33,25 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:layout_marginTop="15dp"/>
+            android:padding="5dp"
+            android:layout_marginTop="5dp"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_height="match_parent"
+    <ScrollView
+        android:layout_height="wrap_content"
         app:layout_widthPercent="50%"
-        android:layout_toRightOf="@id/listening_leftPanel"
+        android:layout_toRightOf="@id/listening_leftPanel">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/listening_frame1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/listening_txtChoice1"
                 android:layout_width="match_parent"
@@ -57,7 +62,7 @@
             android:id="@+id/listening_frame2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/listening_txtChoice2"
                 android:layout_width="match_parent"
@@ -68,7 +73,7 @@
             android:id="@+id/listening_frame3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/listening_txtChoice3"
                 android:layout_width="match_parent"
@@ -79,7 +84,7 @@
             android:id="@+id/listening_frame4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/listening_txtChoice4"
                 android:layout_width="match_parent"
@@ -88,5 +93,5 @@
         </FrameLayout>
 
     </LinearLayout>
-
+    </ScrollView>
 </android.support.percent.PercentRelativeLayout>

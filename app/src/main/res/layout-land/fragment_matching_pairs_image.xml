@@ -35,15 +35,15 @@
         </FrameLayout>
     </LinearLayout>
 
-<LinearLayout
+<android.support.percent.PercentRelativeLayout
     android:layout_height="match_parent"
     app:layout_widthPercent="50%"
     android:layout_toRightOf="@id/matchingPairsImage_leftPanel"
     android:orientation="vertical">
     <FrameLayout
         android:id="@+id/matchingPairsImage_frame5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_heightPercent="50%"
         android:padding="@dimen/frame_border">
         <ImageView
             android:id="@+id/matchingPairsImage_imageView1"
@@ -53,8 +53,9 @@
     </FrameLayout>
     <FrameLayout
         android:id="@+id/matchingPairsImage_frame6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_heightPercent="50%"
+        android:layout_below="@id/matchingPairsImage_frame5"
         android:padding="@dimen/frame_border">
         <ImageView
             android:id="@+id/matchingPairsImage_imageView2"
@@ -63,7 +64,7 @@
             android:adjustViewBounds="true" />
     </FrameLayout>
 
-</LinearLayout>
+</android.support.percent.PercentRelativeLayout>
 
 
 </android.support.percent.PercentRelativeLayout>

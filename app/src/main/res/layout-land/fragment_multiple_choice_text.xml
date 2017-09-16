@@ -31,22 +31,27 @@
             android:id="@+id/multipleChoiceText_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/frame_border"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:layout_marginTop="15dp"/>
         </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_height="match_parent"
         app:layout_widthPercent="50%"
-        android:layout_toRightOf="@id/multipleChoiceText_leftPanel"
+        android:layout_toRightOf="@id/multipleChoiceText_leftPanel">
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+
         android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/multipleChoiceText_frame1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/multipleChoiceText_txtChoice1"
                 android:layout_width="match_parent"
@@ -57,7 +62,7 @@
             android:id="@+id/multipleChoiceText_frame2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/multipleChoiceText_txtChoice2"
                 android:layout_width="match_parent"
@@ -68,7 +73,7 @@
             android:id="@+id/multipleChoiceText_frame3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/multipleChoiceText_txtChoice3"
                 android:layout_width="match_parent"
@@ -79,14 +84,14 @@
             android:id="@+id/multipleChoiceText_frame4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/multipleChoiceText_txtChoice4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/SelectableButton"/>
         </FrameLayout>
-
     </LinearLayout>
+    </ScrollView>
 
 </android.support.percent.PercentRelativeLayout>

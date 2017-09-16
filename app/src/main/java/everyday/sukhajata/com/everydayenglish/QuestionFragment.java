@@ -78,7 +78,6 @@ public class QuestionFragment extends Fragment {
             
         }
         
-        
     }
 
     @Override
@@ -174,7 +173,7 @@ public class QuestionFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ((MyApplication)getActivity().getApplication()).playAudio(mTarget.English);
+        ((MyApplication)getActivity().getApplication()).playAudio(mPage.Content);
     }
 
 

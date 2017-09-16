@@ -152,6 +152,7 @@ public class TranslateFragment extends Fragment implements AudioFinishedCallback
 
             frame.addView(btn);
             flexboxLayout.addView(frame);
+            visibleFrames.add(frame);
         }
 
         Button btnNext = (Button)layout.findViewById(R.id.translate_btnNext);

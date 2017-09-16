@@ -1,0 +1,97 @@
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="everyday.sukhajata.com.everydayenglish.QuestionFragment"
+    android:background="@color/colorLabelBackground">
+
+    <LinearLayout
+        android:id="@+id/question_leftPanel"
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/question_speaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_speaker" />
+            <TextView
+                android:id="@+id/question_txtContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/question_speaker"
+                android:layout_centerVertical="true"
+                style="@style/LabelTarget"/>
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/question_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:padding="5dp" />
+    </LinearLayout>
+
+    <ScrollView
+        app:layout_widthPercent="50%"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/question_leftPanel">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/question_frame1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/frame_border">
+            <Button
+                android:id="@+id/question_txtChoice1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/question_frame2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/frame_border">
+            <Button
+                android:id="@+id/question_txtChoice2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/question_frame3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/frame_border">
+            <Button
+                android:id="@+id/question_txtChoice3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/question_frame4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/frame_border">
+            <Button
+                android:id="@+id/question_txtChoice4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SelectableButton"/>
+        </FrameLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+</android.support.percent.PercentRelativeLayout>

@@ -1,4 +1,4 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +7,12 @@
     android:background="@color/colorLabelBackground"
     android:orientation="vertical"
     tools:context="everyday.sukhajata.com.everydayenglish.TranslateFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
     <TextView
         android:id="@+id/translate_txtTarget"
         android:layout_width="match_parent"
@@ -44,17 +50,12 @@
         android:id="@+id/translate_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/translate_flexbox"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="15dp"/>
+        android:padding="@dimen/frame_border" />
     <Button
         android:id="@+id/translate_btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         style="@style/NavigationButton"
-        android:layout_marginBottom="@dimen/button_border"
         android:text="@string/next"
         android:enabled="false"/>
-</LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

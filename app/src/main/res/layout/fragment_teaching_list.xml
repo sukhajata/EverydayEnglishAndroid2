@@ -31,11 +31,8 @@
 
     <Button
         android:id="@+id/teaching_btn_continue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/teaching_list"
-        android:layout_centerHorizontal="true"
         android:text="@string/next"
         style="@style/NavigationButton"/>
 

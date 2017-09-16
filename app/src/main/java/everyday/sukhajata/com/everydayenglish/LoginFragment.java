@@ -112,6 +112,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (s.length() > 2) {
                     btnSubmit.setEnabled(true);
+                    btnSubmit.setBackgroundColor(ResourcesCompat.getColor(layout.getResources(), R.color.colorBorderCorrect, null));
                 }
             }
 
@@ -161,7 +162,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
                 int teacherId = 1;
                 try {
                     teacherId = Integer.parseInt(txtTeacherId.getText().toString());
-                } catch (NumberFormatException) {
+                } catch (NumberFormatException ex) {
                     txtTeacherId.setBackgroundColor(ResourcesCompat.getColor(layout.getResources(), R.color.colorBorderWrong, null));
                     return;
                 }
@@ -173,7 +174,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
                 int studentPosition = 1;
                 try {
                     studentPosition = Integer.parseInt(txtStudentPosition.getText().toString());
-                } catch (NumberFormatException) {
+                } catch (NumberFormatException ex) {
                     txtStudentPosition.setBackgroundColor(ResourcesCompat.getColor(layout.getResources(), R.color.colorBorderWrong, null));
                     return;
                 }
@@ -233,6 +234,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
         return layout;
     }
 
+    /*
     public void btnFind_click() {
         EditText txtClassCode = (EditText) layout.findViewById(R.id.login_classCode);
         String classCode = txtClassCode.getText().toString().toUpperCase();
@@ -272,7 +274,7 @@ public class LoginFragment extends Fragment implements DownloadCallback {
             }
         }
     }
-
+*/
 
     public void onDownloadError(String error) {
 

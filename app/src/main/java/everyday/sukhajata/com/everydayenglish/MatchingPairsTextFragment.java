@@ -237,7 +237,7 @@ public class MatchingPairsTextFragment extends Fragment {
 
             mImageView.setImageResource(android.R.color.transparent);
             mImageView.setBackgroundColor(ResourcesCompat.getColor(mLayout.getResources(),
-                    R.color.colorPrimaryDark, null));
+                    R.color.colorLabelBackground, null));
         }
 
     }

@@ -1,13 +1,15 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorLabelBackground">
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/missingWord_leftPanel"
+        app:layout_widthPercent="50%"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,12 +33,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/LabelTargetThai"/>
+        <ImageView
+            android:id="@+id/missingWord_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"/>
+
+        </LinearLayout>
+
+    <ScrollView
+        app:layout_widthPercent="50%"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/missingWord_leftPanel">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/missingWord_frame1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/missingWord_buttonChoice1"
                 android:layout_width="match_parent"
@@ -47,7 +69,7 @@
             android:id="@+id/missingWord_frame2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/missingWord_buttonChoice2"
                 android:layout_width="match_parent"
@@ -58,7 +80,7 @@
             android:id="@+id/missingWord_frame3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/missingWord_buttonChoice3"
                 android:layout_width="match_parent"
@@ -69,7 +91,7 @@
             android:id="@+id/missingWord_frame4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/button_border">
+            android:padding="@dimen/frame_border">
             <Button
                 android:id="@+id/missingWord_buttonChoice4"
                 android:layout_width="match_parent"
@@ -77,13 +99,8 @@
                 style="@style/SelectableButton"/>
         </FrameLayout>
 
-        <ImageView
-            android:id="@+id/missingWord_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:layout_marginTop="15dp"/>
-    </LinearLayout>
 
-</ScrollView>
+    </LinearLayout>
+    </ScrollView>
+
+</android.support.percent.PercentRelativeLayout>

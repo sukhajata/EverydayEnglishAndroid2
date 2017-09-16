@@ -37,7 +37,7 @@
         android:id="@+id/missingWord_frame1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/missingWord_buttonChoice1"
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
         android:id="@+id/missingWord_frame2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/missingWord_buttonChoice2"
             android:layout_width="match_parent"
@@ -59,7 +59,7 @@
         android:id="@+id/missingWord_frame3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/missingWord_buttonChoice3"
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
         android:id="@+id/missingWord_frame4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_border">
+        android:padding="@dimen/frame_border">
         <Button
             android:id="@+id/missingWord_buttonChoice4"
             android:layout_width="match_parent"
@@ -84,7 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:layout_marginTop="15dp"/>
+            android:padding="5dp"
+            android:layout_marginTop="5dp"/>
     </LinearLayout>
 
 </ScrollView>

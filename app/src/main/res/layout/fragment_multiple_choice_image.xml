@@ -1,12 +1,10 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLabelBackground">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    android:background="@color/colorLabelBackground"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,11 +24,33 @@
                 android:padding="@dimen/button_padding" />
         </RelativeLayout>
 
+<android.support.percent.PercentRelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <!--
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/top_guideline"
+        app:layout_constraintGuide_percent="0.33"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="408dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_guideline"
+        app:layout_constraintGuide_percent="0.66"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="790dp"
+        tools:layout_editor_absoluteX="0dp" />
+-->
     <FrameLayout
         android:id="@+id/multipleChoiceImage_frame1"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        app:layout_heightPercent="33%"
+        android:layout_width="wrap_content"
         android:padding="@dimen/frame_border">
         <ImageView
             android:id="@+id/multipleChoiceImage_imageView1"
@@ -40,8 +60,9 @@
     </FrameLayout>
     <FrameLayout
         android:id="@+id/multipleChoiceImage_frame2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_heightPercent="33%"
+        android:layout_below="@id/multipleChoiceImage_frame1"
         android:padding="@dimen/frame_border">
         <ImageView
             android:id="@+id/multipleChoiceImage_imageView2"
@@ -51,8 +72,9 @@
     </FrameLayout>
     <FrameLayout
         android:id="@+id/multipleChoiceImage_frame3"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        app:layout_heightPercent="33%"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/multipleChoiceImage_frame2"
         android:padding="@dimen/frame_border">
         <ImageView
             android:id="@+id/multipleChoiceImage_imageView3"
@@ -60,6 +82,6 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true" />
     </FrameLayout>
+</android.support.percent.PercentRelativeLayout>
 
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

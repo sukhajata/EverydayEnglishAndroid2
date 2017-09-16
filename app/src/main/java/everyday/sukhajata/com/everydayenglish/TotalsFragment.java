@@ -74,7 +74,7 @@ public class TotalsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        RelativeLayout view =  (RelativeLayout)inflater.inflate(R.layout.fragment_totals, container, false);
+        View view =  inflater.inflate(R.layout.fragment_totals, container, false);
 
         TextView txtCorrect = (TextView)view.findViewById(R.id.totals_txtCorrect);
         txtCorrect.setText(String.valueOf(mCorrect));

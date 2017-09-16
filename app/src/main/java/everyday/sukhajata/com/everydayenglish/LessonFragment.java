@@ -69,7 +69,7 @@ public class LessonFragment extends Fragment {
             Context context = view.getContext();
             ArrayList<Lesson> lessons = EverydayLanguageDbHelper
                                         .getInstance(getActivity())
-                                        .getLessonsByModule(mModuleId);
+                                        .getLessonsForUser(mModuleId, mUserId);
             RecyclerView recyclerView = (RecyclerView) view;
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             layoutManager.setStackFromEnd(true);

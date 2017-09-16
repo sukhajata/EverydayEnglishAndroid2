@@ -47,7 +47,7 @@
 
     <style name="SelectableButton">
         <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/colorLabelBackground</item>
         <item name="android:padding">@dimen/button_padding</item>
     </style>
@@ -66,6 +66,9 @@
     </style>
 
     <style name="NavigationButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:background">@color/colorBorderCorrect</item>

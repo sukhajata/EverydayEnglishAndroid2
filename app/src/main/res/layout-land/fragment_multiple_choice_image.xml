@@ -26,14 +26,6 @@
                 android:layout_centerVertical="true"
                 android:padding="@dimen/button_padding" />
         </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        app:layout_widthPercent="50%"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/multipleChoiceImage_leftPanel">
-
         <FrameLayout
             android:id="@+id/multipleChoiceImage_frame1"
             android:layout_height="wrap_content"
@@ -45,10 +37,18 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true" />
         </FrameLayout>
+    </LinearLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        app:layout_widthPercent="50%"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/multipleChoiceImage_leftPanel">
+
         <FrameLayout
             android:id="@+id/multipleChoiceImage_frame2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            app:layout_heightPercent="50%"
             android:padding="@dimen/frame_border">
             <ImageView
                 android:id="@+id/multipleChoiceImage_imageView2"
@@ -58,8 +58,9 @@
         </FrameLayout>
         <FrameLayout
             android:id="@+id/multipleChoiceImage_frame3"
-            android:layout_height="wrap_content"
+            app:layout_heightPercent="50%"
             android:layout_width="match_parent"
+            android:layout_below="@id/multipleChoiceImage_frame2"
             android:padding="@dimen/frame_border">
             <ImageView
                 android:id="@+id/multipleChoiceImage_imageView3"
@@ -68,6 +69,6 @@
                 android:adjustViewBounds="true" />
         </FrameLayout>
 
-    </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
 
 </android.support.percent.PercentRelativeLayout>
